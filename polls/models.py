@@ -3,6 +3,18 @@ from django.db import models
 import datetime
 from django.utils import timezone
 
+class Node(models.Model):
+    node_id = models.CharField(max_length=200)
+    latit = models.DateTimeField('date published')
+    longit
+    elevation
+
+    def __unicode__(self):
+        return self.node_id
+
+
+
+
 class Poll(models.Model):
     question = models.CharField(max_length=200)
     pub_date = models.DateTimeField('date published')
