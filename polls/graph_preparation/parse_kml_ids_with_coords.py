@@ -5,7 +5,7 @@ import json
 import urllib2
 
 def get_coordinates():
-    sxml = ''.join(open("mwap_a.kml").readlines())
+    sxml = ''.join(open("/Users/meirfischer/Dropbox/django_tut/mysite/polls/graph_preparation/mwap_a.kml").readlines())
     tree = et.fromstring(sxml)
     coordinates = []
 

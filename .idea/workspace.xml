@@ -54,10 +54,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="parse_kml_ids_with_coords.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="parse_kml_ids_with_coords.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/polls/graph_preparation/parse_kml_ids_with_coords.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="100" column="17" selection-start="4254" selection-end="4254" vertical-scroll-proportion="0.44911504" vertical-offset="2697" max-vertical-offset="3509">
+            <state line="6" column="22" selection-start="169" selection-end="169" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3509">
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
@@ -65,10 +65,30 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="models.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="graph_input_2_db.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/polls/graph_preparation/graph_input_2_db.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="17" column="19" selection-start="580" selection-end="580" vertical-scroll-proportion="0.0" vertical-offset="52" max-vertical-offset="928">
+              <folding>
+                <element signature="e#28#115#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mwap_a.kml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/polls/graph_preparation/mwap_a.kml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="5" column="62" selection-start="152" selection-end="152" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="12006">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="models.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/polls/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="41" selection-start="666" selection-end="666" vertical-scroll-proportion="0.0" vertical-offset="260" max-vertical-offset="1276">
+            <state line="11" column="26" selection-start="271" selection-end="271" vertical-scroll-proportion="0.41973683" vertical-offset="0" max-vertical-offset="1276">
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -89,8 +109,11 @@
         <option value="$PROJECT_DIR$/polls/views.py" />
         <option value="$PROJECT_DIR$/mysite/urls.py" />
         <option value="$PROJECT_DIR$/polls/urls.py" />
-        <option value="$PROJECT_DIR$/polls/graph_preparation/parse_kml_ids_with_coords.py" />
         <option value="$PROJECT_DIR$/polls/models.py" />
+        <option value="$PROJECT_DIR$/polls/graph_preparation/__init__.py" />
+        <option value="$PROJECT_DIR$/polls/graph_preparation/graph_input_2_db.py" />
+        <option value="$PROJECT_DIR$/polls/graph_preparation/coord_data.py" />
+        <option value="$PROJECT_DIR$/polls/graph_preparation/parse_kml_ids_with_coords.py" />
       </list>
     </option>
   </component>
@@ -127,6 +150,32 @@
     <panes>
       <pane id="Scope">
         <subPane subId="Problems" />
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="mysite">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="mysite">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="polls">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
       </pane>
       <pane id="ProjectPane">
         <subPane>
@@ -227,7 +276,7 @@
       <console-settings />
     </option>
   </component>
-  <component name="RunManager" selected="Python.parse_kml_ids_with_coords">
+  <component name="RunManager" selected="Python.graph_input_2_db">
     <configuration default="false" name="parse_kml_ids_with_coords" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -241,6 +290,24 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="mysite" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/polls/graph_preparation/parse_kml_ids_with_coords.py" />
+      <option name="PARAMETERS" value="" />
+      <RunnerSettings RunnerId="PythonRunner" />
+      <ConfigurationWrapper RunnerId="PythonRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="graph_input_2_db" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/polls/graph_preparation" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="mysite" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/polls/graph_preparation/graph_input_2_db.py" />
       <option name="PARAMETERS" value="" />
       <RunnerSettings RunnerId="PythonRunner" />
       <ConfigurationWrapper RunnerId="PythonRunner" />
@@ -367,12 +434,14 @@
       <option name="USE_PATTERN" value="false" />
       <method />
     </configuration>
-    <list size="1">
+    <list size="2">
       <item index="0" class="java.lang.String" itemvalue="Python.parse_kml_ids_with_coords" />
+      <item index="1" class="java.lang.String" itemvalue="Python.graph_input_2_db" />
     </list>
     <recent_temporary>
-      <list size="1">
-        <item index="0" class="java.lang.String" itemvalue="Python.parse_kml_ids_with_coords" />
+      <list size="2">
+        <item index="0" class="java.lang.String" itemvalue="Python.graph_input_2_db" />
+        <item index="1" class="java.lang.String" itemvalue="Python.parse_kml_ids_with_coords" />
       </list>
     </recent_temporary>
   </component>
@@ -410,11 +479,11 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1467793" sideWeight="0.5309829" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1467793" sideWeight="0.84615386" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.4690171" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15384616" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -506,27 +575,43 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/polls/graph_preparation/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="26" selection-start="26" selection-end="26" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="465">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/polls/graph_preparation/parse_kml_ids_with_coords.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="22" selection-start="169" selection-end="169" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3509">
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/polls/graph_preparation/graph_input_2_db.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="19" selection-start="580" selection-end="580" vertical-scroll-proportion="0.0" vertical-offset="52" max-vertical-offset="928">
+          <folding>
+            <element signature="e#28#115#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/polls/graph_preparation/mwap_a.kml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="408" column="0" selection-start="11046" selection-end="11046" vertical-scroll-proportion="1.8193549" vertical-offset="10986" max-vertical-offset="12006">
+        <state line="5" column="62" selection-start="152" selection-end="152" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="12006">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/polls/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="41" selection-start="666" selection-end="666" vertical-scroll-proportion="0.0" vertical-offset="260" max-vertical-offset="1276">
+        <state line="11" column="26" selection-start="271" selection-end="271" vertical-scroll-proportion="0.41973683" vertical-offset="0" max-vertical-offset="1276">
           <folding>
             <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/polls/graph_preparation/parse_kml_ids_with_coords.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="100" column="17" selection-start="4254" selection-end="4254" vertical-scroll-proportion="0.44911504" vertical-offset="2697" max-vertical-offset="3509">
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
           </folding>
         </state>
       </provider>
