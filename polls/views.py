@@ -6,7 +6,6 @@ from django.core.urlresolvers import reverse
 from polls.models import Choice, Poll
 
 def route_index(request):
-    #return HttpResponse("Hello, world. You're at the route index.")
     return render(request, 'polls/route_index.html', {'test': [1, 2, 3] })
 
 def index(request):
@@ -42,3 +41,4 @@ def vote(request, poll_id):
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
         return HttpResponseRedirect(reverse('polls:results', args=(p.id,)))
+    
