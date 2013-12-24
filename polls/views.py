@@ -3,10 +3,12 @@ from django.template import RequestContext, loader
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
-from polls.models import Choice, Poll
+from polls.models import Choice, Poll, Node
 
 def route_index(request):
-    return render(request, 'polls/route_index.html', {'test': [1, 2, 3] })
+    node_objs = Node.objects.all()
+    context = {'nodes': node_objs }
+    return render(request, 'polls/route_index.html', context)
 
 def index(request):
     latest_poll_list = Poll.objects.all().order_by('-pub_date')[:5]
@@ -41,4 +43,3 @@ def vote(request, poll_id):
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
         return HttpResponseRedirect(reverse('polls:results', args=(p.id,)))
-    
