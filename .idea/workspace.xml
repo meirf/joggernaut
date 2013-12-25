@@ -32,19 +32,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="views.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/polls/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="30" column="33" selection-start="1077" selection-end="1077" vertical-scroll-proportion="0.7112832" vertical-offset="24" max-vertical-offset="2001">
+            <state line="29" column="33" selection-start="1039" selection-end="1039" vertical-scroll-proportion="0.0" vertical-offset="24" max-vertical-offset="2001">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="route_index.html" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="route_index.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/polls/templates/polls/route_index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="33" column="71" selection-start="1615" selection-end="1615" vertical-scroll-proportion="-5.029851" vertical-offset="620" max-vertical-offset="4234">
+            <state line="22" column="10" selection-start="903" selection-end="903" vertical-scroll-proportion="0.03464755" vertical-offset="609" max-vertical-offset="3625">
               <folding>
                 <element signature="n#style#0;n#input#0;n#p#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#input#0;n#p#1;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -73,8 +73,8 @@
         <option value="$PROJECT_DIR$/polls/templates/polls/index.html" />
         <option value="$PROJECT_DIR$/polls/templates/polls/detail.html" />
         <option value="$PROJECT_DIR$/polls/urls.py" />
-        <option value="$PROJECT_DIR$/polls/templates/polls/route_index.html" />
         <option value="$PROJECT_DIR$/polls/views.py" />
+        <option value="$PROJECT_DIR$/polls/templates/polls/route_index.html" />
       </list>
     </option>
   </component>
@@ -552,21 +552,21 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/polls/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="33" selection-start="1039" selection-end="1039" vertical-scroll-proportion="0.0" vertical-offset="24" max-vertical-offset="2001">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/polls/templates/polls/route_index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="71" selection-start="1615" selection-end="1615" vertical-scroll-proportion="-5.029851" vertical-offset="620" max-vertical-offset="4234">
+        <state line="22" column="10" selection-start="903" selection-end="903" vertical-scroll-proportion="0.03464755" vertical-offset="609" max-vertical-offset="3625">
           <folding>
             <element signature="n#style#0;n#input#0;n#p#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#input#0;n#p#1;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#input#0;n#p#2;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/polls/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="33" selection-start="1077" selection-end="1077" vertical-scroll-proportion="0.7112832" vertical-offset="24" max-vertical-offset="2001">
-          <folding />
         </state>
       </provider>
     </entry>

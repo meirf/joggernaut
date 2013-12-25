@@ -43,29 +43,8 @@
         });
   }
 
-  var changeDistance = function(dist_min, dist_max){
-        $( "#amount-range-dist" ).val( dist_min + "-" + dist_max);
-        $.getJSON("http://127.0.0.1:8000/polls/ajax/",
-        {name:"Donald Duck",
-         city:"Duckburg",
-         csrfmiddlewaretoken:'{{ csrf_token }}'
-         },
-        function(data,status){
-          alert("\nStatus: " + status + "\nData: " + data.message);
-        })
-        .fail(function(xhr) {
-            console.log("Error: " + xhr.statusText);
-            alert("Error: " + xhr.statusText);
-        });
-  }
-
-  var changeElevMin = function(min_a, min_b){
-        $( "#amount-range-elev-min" ).val( min_a + "-" + min_b);
-        computePathsFresh();
-  }
-
-  var changeElevMax = function(max_a, max_b){
-        $( "#amount-range-elev-max" ).val( max_a + "-" + max_b);
+  var updateSliderVals = function(slider_name, left_val, right_val){
+        $( slider_name ).val( left_val + "-" + right_val);
   }
 
   $(function() {
@@ -76,11 +55,11 @@
       max: 3000,
       values: [ 1200, 2000 ],
       change: function( event, ui ) {
-        changeDistance(ui.values[0], ui.values[1]);
+        updateSliderVals("#amount-range-dist", ui.values[0], ui.values[1]);
       }
     });
-    $("#amount-range-dist").val($("#slider-range-dist").slider("values", 0) +
-      "-" + $("#slider-range-dist").slider("values", 1));
+    updateSliderVals("#amount-range-dist" , $("#slider-range-dist").slider("values", 0),
+                                            $("#slider-range-dist").slider("values", 1)  );
   });
 
   $(function() {
@@ -91,11 +70,11 @@
       max: 500,
       values: [ 0, 50 ],
       change: function( event, ui ) {
-        changeElevMin(ui.values[0], ui.values[1]);
+        updateSliderVals("#amount-range-elev-min" , ui.values[0], ui.values[1]);
       }
     });
-    $("#amount-range-elev-min").val($("#slider-range-elev-min").slider("values", 0) +
-      "-" + $("#slider-range-elev-min").slider("values", 1));
+    updateSliderVals("#amount-range-elev-min" , $("#slider-range-elev-min").slider("values", 0),
+                                                $("#slider-range-elev-min").slider("values", 1)  );
   });
 
   $(function() {
@@ -106,11 +85,11 @@
       max: 500,
       values: [ 100, 200 ],
       change: function( event, ui ) {
-        changeElevMax(ui.values[0], ui.values[1]);
+        updateSliderVals("#amount-range-elev-max" , ui.values[0], ui.values[1]);
       }
     });
-    $("#amount-range-elev-max").val($("#slider-range-elev-max").slider("values", 0) +
-      "-" + $("#slider-range-elev-max").slider("values", 1));
+    updateSliderVals("#amount-range-elev-max" , $("#slider-range-elev-max").slider("values", 0),
+                                                $("#slider-range-elev-max").slider("values", 1)  );
   });
   </script>
 </head>
