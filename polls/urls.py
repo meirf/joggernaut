@@ -5,6 +5,8 @@ from polls import views
 urlpatterns = patterns('',
     url(r'^route/$', views.route_index, name='route'),
 
+    url(r'^route_solutions/$', views.route_solutions, name='route_solutions'),
+
     url(r'^$', views.index, name='index'),
     # ex: /polls/5/
     url(r'^(?P<poll_id>\d+)/$', views.detail, name='detail'),

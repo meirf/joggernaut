@@ -10,6 +10,10 @@ def route_index(request):
     context = {'nodes': node_objs }
     return render(request, 'polls/route_index.html', context)
 
+def route_solutions(request):
+    return HttpResponse("Hello")
+
+
 def index(request):
     latest_poll_list = Poll.objects.all().order_by('-pub_date')[:5]
     context = {'latest_poll_list': latest_poll_list}

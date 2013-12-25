@@ -4,49 +4,113 @@
   <meta charset="utf-8">
   <title>Run Guidance</title>
 
-  <form name="path_specs" method="GET">
+  <form action="{% url 'polls:route_solutions' %}" method="GET">
     <p>Choose your starting location:</p>
     <select name="starting_coord">
+        <option value="no_choice_yet" >Select from list</option>
         {% for n in nodes %}
             <option value="{{ n.node_id }}">{{ n.latit }}, {{ n.longit }}</option>
         {% endfor %}
     </select>
+    <input type="submit" value="Get Path!" />
   </form>
 
   <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
   <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
   <link rel="stylesheet" href="/resources/demos/style.css">
   <script>
-  $(function() {
 
-    $( "#slider-range" ).slider({
+  var httpGet = function(theUrl)
+  {
+    var xmlHttp = null;
+    xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false );
+    xmlHttp.send( null );
+    return xmlHttp.responseText;
+  }
+
+  var changeDistance = function(dist_min, dist_max){
+        $( "#amount-range-dist" ).val( dist_min + " - " + dist_max);
+  }
+
+  var changeElevMin = function(min_a, min_b){
+        $( "#amount-range-elev-min" ).val( min_a + " - " + min_b);
+  }
+
+  var changeElevMax = function(max_a, max_b){
+        $( "#amount-range-elev-max" ).val( max_a + " - " + max_b);
+  }
+
+  $(function() {
+    $( "#slider-range-dist" ).slider({
       step: 5,
       range: true,
       min: 300,
       max: 3000,
       values: [ 1200, 2000 ],
-      slide: function( event, ui ) {
-        $( "#amount" ).val( ui.values[0] + " - " + ui.values[1]);
-        console.log("hello");
+      change: function( event, ui ) {
+        changeDistance(ui.values[0], ui.values[1]);
       }
     });
+    $("#amount-range-dist").val($("#slider-range-dist").slider("values", 0) +
+      " - " + $("#slider-range-dist").slider("values", 1));
+  });
 
-    $("#amount").val($("#slider-range").slider("values", 0) +
-      " - " + $("#slider-range").slider("values", 1));
+  $(function() {
+    $( "#slider-range-elev-min" ).slider({
+      step: 5,
+      range: true,
+      min: 0,
+      max: 500,
+      values: [ 0, 50 ],
+      change: function( event, ui ) {
+        changeElevMin(ui.values[0], ui.values[1]);
+      }
+    });
+    $("#amount-range-elev-min").val($("#slider-range-elev-min").slider("values", 0) +
+      " - " + $("#slider-range-elev-min").slider("values", 1));
+  });
 
+  $(function() {
+    $( "#slider-range-elev-max" ).slider({
+      step: 5,
+      range: true,
+      min: 0,
+      max: 500,
+      values: [ 100, 200 ],
+      change: function( event, ui ) {
+        changeElevMax(ui.values[0], ui.values[1]);
+      }
+    });
+    $("#amount-range-elev-max").val($("#slider-range-elev-max").slider("values", 0) +
+      " - " + $("#slider-range-elev-max").slider("values", 1));
   });
   </script>
 </head>
 <body>
 
 <p>
-  <label for="amount">Distance range(meters):</label>
-  <input type="text" id="amount" style="border:0; color:#f6931f; font-weight:bold;">
+  <label for="amount-range-dist">Distance range(meters):</label>
+  <input type="text" id="amount-range-dist" style="border:0; color:#f6931f; font-weight:bold;">
 </p>
 
-<div id="slider-range"></div>
+<div id="slider-range-dist"></div>
+
+<p>
+  <label for="amount-range-elev-min">Elevation min range(meters):</label>
+  <input type="text" id="amount-range-elev-min" style="border:0; color:#f6931f; font-weight:bold;">
+</p>
+
+<div id="slider-range-elev-min"></div>
+
+<p>
+  <label for="amount-range-elev-max">Elevation max range(meters):</label>
+  <input type="text" id="amount-range-elev-max" style="border:0; color:#f6931f; font-weight:bold;">
+</p>
+
+<div id="slider-range-elev-max"></div>
 
 </body>
 </html>
-
