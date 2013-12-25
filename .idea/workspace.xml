@@ -26,7 +26,7 @@
       <file leaf-file-name="urls.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/polls/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="37" selection-start="189" selection-end="204" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="638">
+            <state line="9" column="50" selection-start="282" selection-end="282" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="696">
               <folding>
                 <element signature="e#0#42#0" expanded="true" />
               </folding>
@@ -37,7 +37,7 @@
       <file leaf-file-name="views.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/polls/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="28" selection-start="542" selection-end="554" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1769">
+            <state line="9" column="0" selection-start="335" selection-end="335" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2001">
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -48,7 +48,7 @@
       <file leaf-file-name="route_index.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/polls/templates/polls/route_index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="51" column="6" selection-start="1635" selection-end="1635" vertical-scroll-proportion="0.9330254" vertical-offset="671" max-vertical-offset="3741">
+            <state line="113" column="0" selection-start="3347" selection-end="3347" vertical-scroll-proportion="2.8752887" vertical-offset="787" max-vertical-offset="4118">
               <folding>
                 <element signature="n#style#0;n#input#0;n#p#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#input#0;n#p#1;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -558,27 +558,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/polls/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="28" selection-start="542" selection-end="554" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1769">
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/polls/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="37" selection-start="189" selection-end="204" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="638">
+        <state line="9" column="50" selection-start="282" selection-end="282" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="696">
           <folding>
             <element signature="e#0#42#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/polls/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="0" selection-start="335" selection-end="335" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2001">
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/polls/templates/polls/route_index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="6" selection-start="1635" selection-end="1635" vertical-scroll-proportion="0.9330254" vertical-offset="671" max-vertical-offset="3741">
+        <state line="113" column="0" selection-start="3347" selection-end="3347" vertical-scroll-proportion="2.8752887" vertical-offset="787" max-vertical-offset="4118">
           <folding>
             <element signature="n#style#0;n#input#0;n#p#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#input#0;n#p#1;n#body#0;n#html#0;n#!!top" expanded="true" />

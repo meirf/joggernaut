@@ -7,6 +7,8 @@ urlpatterns = patterns('',
 
     url(r'^route_solutions/$', views.route_solutions, name='route_solutions'),
 
+    url(r'^ajax/$', views.ajax_test, name="ajax"),
+
     url(r'^$', views.index, name='index'),
     # ex: /polls/5/
     url(r'^(?P<poll_id>\d+)/$', views.detail, name='detail'),

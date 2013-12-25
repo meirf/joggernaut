@@ -5,7 +5,15 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.utils import simplejson
 from polls.models import Choice, Poll, Node
+import json
 
+def ajax_test(request):
+    if request.method == 'POST' and request.is_ajax():
+        name = request.POST['name']
+        city = request.POST['city']
+        message = name + ' lives in ' + city
+        return HttpResponse(json.dumps({'message': message}))
+    return HttpResponse("You're looking at ajax_test")
 
 def route_index(request):
     node_objs = Node.objects.all()
