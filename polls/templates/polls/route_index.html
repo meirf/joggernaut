@@ -4,17 +4,6 @@
   <meta charset="utf-8">
   <title>Run Guidance</title>
 
-  <form action="{% url 'polls:route_solutions' %}" method="GET">
-    <p>Choose your starting location:</p>
-    <select id="start_list" name="starting_coord">
-        <option value="no_choice_yet" ></option>
-        {% for n in nodes %}
-            <option value="{{ n.node_id }}">{{ n.latit }}, {{ n.longit }}</option>
-        {% endfor %}
-    </select>
-    <input type="submit" value="Get Path!" />
-  </form>
-
   <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
   <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -115,6 +104,18 @@
 </p>
 
 <div id="slider-range-elev-max"></div>
+
+<form action="{% url 'polls:route_solutions' %}" method="GET">
+    <p>Choose your starting location:</p>
+    <select id="start_list" name="starting_coord">
+        <option value="no_choice_yet" ></option>
+        {% for n in nodes %}
+            <option value="{{ n.node_id }}">{{ n.latit }}, {{ n.longit }}</option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="Get New Paths!" />
+  </form>
+
 
 </body>
 </html>

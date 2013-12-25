@@ -19,7 +19,7 @@ def ajax_test(request):
 
 def route_index(request):
     node_objs = Node.objects.all()
-    context = {'nodes': node_objs }
+    context = { 'nodes': node_objs }
     return render(request, 'polls/route_index.html', context)
 
 def route_solutions(request):
