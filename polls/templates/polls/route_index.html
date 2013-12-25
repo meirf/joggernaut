@@ -22,38 +22,20 @@
   <link rel="stylesheet" href="/resources/demos/style.css">
   <script>
 
-  $(document).ready(function(){
-  $("#my_form").submit(function(){
-    $.post("http://127.0.0.1:8000/polls/ajax/",
-    {name:"Donald Duck",
-     city:"Duckburg",
-     csrfmiddlewaretoken:'{{ csrf_token }}'
-     },
-    function(data,status){
-      alert("\nStatus: " + status + "Data: " + data);
-    })
-    .fail(function(xhr) {
-        console.log("Error: " + xhr.statusText);
-        alert("Error: " + xhr.statusText);
-    });
-    return false;
-  });
-  });
-
   var changeDistance = function(dist_min, dist_max){
         $( "#amount-range-dist" ).val( dist_min + " - " + dist_max);
-        $.post("http://127.0.0.1:8000/polls/ajax/",
-    {name:"Donald Duck",
-     city:"Duckburg",
-     csrfmiddlewaretoken:'{{ csrf_token }}'
-     },
-    function(data,status){
-      alert("\nStatus: " + status + "Data: " + data);
-    })
-    .fail(function(xhr) {
-        console.log("Error: " + xhr.statusText);
-        alert("Error: " + xhr.statusText);
-    });
+        $.getJSON("http://127.0.0.1:8000/polls/ajax/",
+        {name:"Donald Duck",
+         city:"Duckburg",
+         csrfmiddlewaretoken:'{{ csrf_token }}'
+         },
+        function(data,status){
+          alert("\nStatus: " + status + "\nData: " + data.message);
+        })
+        .fail(function(xhr) {
+            console.log("Error: " + xhr.statusText);
+            alert("Error: " + xhr.statusText);
+        });
   }
 
   var changeElevMin = function(min_a, min_b){

@@ -8,9 +8,9 @@ from polls.models import Choice, Poll, Node
 import json
 
 def ajax_test(request):
-    if request.method == 'POST' and request.is_ajax():
-        name = request.POST['name']
-        city = request.POST['city']
+    if request.method == 'GET' and request.is_ajax():
+        name = request.GET['name']
+        city = request.GET['city']
         message = name + ' lives in ' + city
         return HttpResponse(json.dumps({'message': message}))
     return HttpResponse("You're looking at ajax_test")
