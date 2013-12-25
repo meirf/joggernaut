@@ -7,6 +7,8 @@ from django.utils import simplejson
 from polls.models import Choice, Poll, Node
 import json
 
+
+
 def ajax_test(request):
     if request.method == 'GET' and request.is_ajax():
         name = request.GET['name']
@@ -21,12 +23,17 @@ def route_index(request):
     return render(request, 'polls/route_index.html', context)
 
 def route_solutions(request):
-    some_data_to_dump = {   'some_var_1': 'foo',
-                            'some_var_2': 'bar',
-                         }
-    data = simplejson.dumps(some_data_to_dump)
-    return HttpResponse(data, mimetype='application/json')
-
+    if request.method == 'GET' and request.is_ajax():
+        a = request.GET['source_node_id']
+        b = request.GET['dist_min']
+        c = request.GET['dist_max']
+        d = request.GET['elev_min_a']
+        e = request.GET['elev_min_b']
+        f = request.GET['elev_max_a']
+        g = request.GET['elev_max_b']
+        message = '\n' + a + '\n' + b + '\n'+ c + '\n'+ d + '\n'+ e + '\n'+ f + '\n'+ g + '\n'
+        return HttpResponse(json.dumps({'message': message}))
+    return HttpResponse("You're looking at route_solutions")
 
 def index(request):
     latest_poll_list = Poll.objects.all().order_by('-pub_date')[:5]

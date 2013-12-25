@@ -6,8 +6,8 @@
 
   <form action="{% url 'polls:route_solutions' %}" method="GET">
     <p>Choose your starting location:</p>
-    <select name="starting_coord">
-        <option value="no_choice_yet" >Select from list</option>
+    <select id="start_list" name="starting_coord">
+        <option value="no_choice_yet" ></option>
         {% for n in nodes %}
             <option value="{{ n.node_id }}">{{ n.latit }}, {{ n.longit }}</option>
         {% endfor %}
@@ -22,8 +22,29 @@
   <link rel="stylesheet" href="/resources/demos/style.css">
   <script>
 
+  var computePathsFresh = function(){
+        $.getJSON("http://127.0.0.1:8000/polls/route_solutions/",
+        {
+           source_node_id: document.getElementById("start_list").value,
+           dist_min: document.getElementById("amount-range-dist").value.split("-")[0],
+           dist_max: document.getElementById("amount-range-dist").value.split("-")[1],
+           elev_min_a: document.getElementById("amount-range-elev-min").value.split("-")[0],
+           elev_min_b: document.getElementById("amount-range-elev-min").value.split("-")[1],
+           elev_max_a: document.getElementById("amount-range-elev-max").value.split("-")[0],
+           elev_max_b: document.getElementById("amount-range-elev-max").value.split("-")[1],
+           csrfmiddlewaretoken:'{{ csrf_token }}'
+        },
+        function(data,status){
+          alert("\nStatus: " + status + "\nData: " + data.message);
+        })
+        .fail(function(xhr) {
+            console.log("Error: " + xhr.statusText);
+            alert("Error: " + xhr.statusText);
+        });
+  }
+
   var changeDistance = function(dist_min, dist_max){
-        $( "#amount-range-dist" ).val( dist_min + " - " + dist_max);
+        $( "#amount-range-dist" ).val( dist_min + "-" + dist_max);
         $.getJSON("http://127.0.0.1:8000/polls/ajax/",
         {name:"Donald Duck",
          city:"Duckburg",
@@ -39,11 +60,12 @@
   }
 
   var changeElevMin = function(min_a, min_b){
-        $( "#amount-range-elev-min" ).val( min_a + " - " + min_b);
+        $( "#amount-range-elev-min" ).val( min_a + "-" + min_b);
+        computePathsFresh();
   }
 
   var changeElevMax = function(max_a, max_b){
-        $( "#amount-range-elev-max" ).val( max_a + " - " + max_b);
+        $( "#amount-range-elev-max" ).val( max_a + "-" + max_b);
   }
 
   $(function() {
@@ -58,7 +80,7 @@
       }
     });
     $("#amount-range-dist").val($("#slider-range-dist").slider("values", 0) +
-      " - " + $("#slider-range-dist").slider("values", 1));
+      "-" + $("#slider-range-dist").slider("values", 1));
   });
 
   $(function() {
@@ -73,7 +95,7 @@
       }
     });
     $("#amount-range-elev-min").val($("#slider-range-elev-min").slider("values", 0) +
-      " - " + $("#slider-range-elev-min").slider("values", 1));
+      "-" + $("#slider-range-elev-min").slider("values", 1));
   });
 
   $(function() {
@@ -88,7 +110,7 @@
       }
     });
     $("#amount-range-elev-max").val($("#slider-range-elev-max").slider("values", 0) +
-      " - " + $("#slider-range-elev-max").slider("values", 1));
+      "-" + $("#slider-range-elev-max").slider("values", 1));
   });
   </script>
 </head>
