@@ -24,7 +24,7 @@
            csrfmiddlewaretoken:'{{ csrf_token }}'
         },
         function(data,status){
-          alert("\nStatus: " + status + "\nData: \n" + data.input_status + "\n" + data.response_data);
+          alert(data.input_status + "\n" + data.response_data);
         })
         .fail(function(xhr) {
             console.log("Error: " + xhr.statusText);
