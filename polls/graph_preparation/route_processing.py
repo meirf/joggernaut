@@ -15,11 +15,14 @@ def check_inherent_specs(route_specs):
    is or what the lower limit elevation is.
    """
 def check_node_exists_in_elev_ranges(route_specs):
+    elevs = [n.elevation for n in Node.objects.all()]
+    elev_message = "\nLowest/Highest elevation in graph: " + "{0:.2f}".format(min(elevs)) +"/"+ "{0:.2f}".format(max(elevs))
     if len(Node.objects.filter(elevation__gte=route_specs.elev_min_a).filter(elevation__lte=route_specs.elev_min_b))==0:
-        raise Exception("No node exists with elevation in range: "+str(route_specs.elev_min_a)+" - "+str(route_specs.elev_min_b))
+        raise Exception("No node exists with elevation in range: "+
+                        str(route_specs.elev_min_a)+" - "+str(route_specs.elev_min_b) + elev_message)
     if len(Node.objects.filter(elevation__gte=route_specs.elev_max_a).filter(elevation__lte=route_specs.elev_max_b))==0:
-        raise Exception("No node exists with elevation in range: "+str(route_specs.elev_max_a)+" - "+str(route_specs.elev_max_b))
-
+        raise Exception("No node exists with elevation in range: "+
+                        str(route_specs.elev_max_a)+" - "+str(route_specs.elev_max_b) + elev_message)
 
 def main_route_calculator(route_specs):
     response = {};
@@ -30,7 +33,3 @@ def main_route_calculator(route_specs):
         response["input_status"] = "BadInput"
         response["response_data"] = e.message
         return response
-
-
-
-
