@@ -1,10 +1,10 @@
 from django.http import Http404
-from django.template import RequestContext, loader
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
-from django.utils import simplejson
 from polls.models import Choice, Poll, Node
+from polls.graph_preparation import route_processing
+from collections import namedtuple
 import json
 
 
@@ -24,6 +24,8 @@ def route_index(request):
 
 def route_solutions(request):
     if request.method == 'GET' and request.is_ajax():
+        RouteSpecs = namedtuple('RouteSpecs', 'source_node dist_min dist_max elev_min_a '
+                                              'elev_min_b elev_max_a elev_max_b')
         a = request.GET['source_node_id']
         b = request.GET['dist_min']
         c = request.GET['dist_max']
@@ -31,9 +33,11 @@ def route_solutions(request):
         e = request.GET['elev_min_b']
         f = request.GET['elev_max_a']
         g = request.GET['elev_max_b']
-        message = '\n' + a + '\n' + b + '\n'+ c + '\n'+ d + '\n'+ e + '\n'+ f + '\n'+ g + '\n'
-        return HttpResponse(json.dumps({'message': message}))
-    return HttpResponse("You're looking at route_solutions")
+        input_specs = RouteSpecs(int(a), int(b), int(c), int(d), int(e), int(f), int(g))
+        route_response = route_processing.main_route_calculator(input_specs)
+        return HttpResponse(json.dumps(route_response))
+
+    return HttpResponse("You're looking at route_solutions non ajax-ly")
 
 def index(request):
     latest_poll_list = Poll.objects.all().order_by('-pub_date')[:5]
