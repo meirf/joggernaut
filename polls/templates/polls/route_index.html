@@ -54,11 +54,11 @@
 
   $(function() {
     $( "#slider-range-elev-min" ).slider({
-      step: 5,
+      step: 1,
       range: true,
       min: 0,
-      max: 500,
-      values: [ 0, 50 ],
+      max: 100,
+      values: [ 0, 20 ],
       change: function( event, ui ) {
         updateSliderVals("#amount-range-elev-min" , ui.values[0], ui.values[1]);
         computePathsFresh();
@@ -70,11 +70,11 @@
 
   $(function() {
     $( "#slider-range-elev-max" ).slider({
-      step: 5,
+      step: 1,
       range: true,
       min: 0,
-      max: 500,
-      values: [ 100, 200 ],
+      max: 100,
+      values: [ 10, 50 ],
       change: function( event, ui ) {
         updateSliderVals("#amount-range-elev-max" , ui.values[0], ui.values[1]);
         computePathsFresh();
@@ -108,13 +108,14 @@
 
 <div id="slider-range-elev-max"></div>
 
-<p>Choose your starting location:</p>
-   <select id="start_list" onchange="computePathsFresh()">
-      <option value="-1" ></option>
-      {% for n in nodes %}
-          <option value="{{ n.node_id }}">{{ n.latit }}, {{ n.longit }}</option>
-      {% endfor %}
-   </select>
+<br></br>
+
+<select id="start_list" onchange="computePathsFresh()">
+   <option value="-1" >Choose your starting coordinates</option>
+   {% for n in nodes %}
+       <option value="{{ n.node_id }}">{{ n.latit }}, {{ n.longit }}</option>
+   {% endfor %}
+</select>
 
 </body>
 </html>
