@@ -22,16 +22,18 @@ def ensure_set_graph_from_db():
 def check_nodes_in_ranges_reachable_within_distance(route_specs):
     ensure_set_graph_from_db()
     (D,P) = graph_algorithms.Dijkstra(adj_list, route_specs.source_node)
-    return D
-    # node within distance with elev in X
-    # node_ids = filter(lambda x, D.values())
-    # node within distance with elev in Y
-    # len(filter(,D.values()))>0
+    nodes_within_max_distance = [node for node, dist in D.iteritems() if dist<=route_specs.dist_max]
+    node_in_X = [node for node in nodes_within_max_distance if route_specs.elev_min_a<=elevs[node]<=route_specs.elev_min_b]
+    node_in_Y = [node for node in nodes_within_max_distance if route_specs.elev_max_a<=elevs[node]<=route_specs.elev_max_b]
+    if len(node_in_X)==0 or len(node_in_Y)==0:
+        elevs_within_D1 = [elevs[node] for node in nodes_within_max_distance]
+        raise Exception("Elevation ranges can't be reached. Min elevation/Max elevation within distance "
+                        + str(route_specs.dist_max) +" is " + "{0:.2f}".format(min(elevs_within_D1)) +"/"+ "{0:.2f}".format(max(elevs_within_D1)))
 
 #check elev ranges are allowable
 def check_inherent_specs(route_specs):
     if route_specs.elev_min_b > route_specs.elev_max_b:
-        raise Exception(str(route_specs.elev_min_b) + " is greater than " + str(route_specs.elev_max_b))
+        raise Exception("Fix elevation ranges: " +str(route_specs.elev_min_b) + " is greater than " + str(route_specs.elev_max_b))
 
 
 """If there is no node in the pre-computed subsection
@@ -66,10 +68,11 @@ def main_route_calculator(route_specs):
         check_inherent_specs(route_specs)
         check_node_exists_in_elev_ranges(route_specs)
         check_source_node_set(route_specs)
+        check_nodes_in_ranges_reachable_within_distance(route_specs)
     except Exception, e:
         response["input_status"] = "BadInput"
         response["response_data"] = e.message
         return response
-    response["input_status"] = "ActionableInput"
-    response["response_data"] = str(check_nodes_in_ranges_reachable_within_distance(route_specs))
-    return response
+    #response["input_status"] = "ActionableInput"
+    #response["response_data"] = str(check_nodes_in_ranges_reachable_within_distance(route_specs))
+    #return response
