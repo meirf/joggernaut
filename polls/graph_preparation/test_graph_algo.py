@@ -1,19 +1,7 @@
 __author__ = 'meirfischer'
 
-import unittest
-import graph_algorithms
-#from polls.views import RouteSpecs
-
-def get_test_route_specs():
-    source_node = 0
-    dist_min = 1200
-    dist_max = 2000
-    elev_min_a = 0
-    elev_min_b = 20
-    elev_max_a = 10
-    elev_max_b = 50
-    #route_specs = RouteSpecs(source_node, dist_min, dist_max, elev_min_a, elev_min_b, elev_max_a, elev_max_b)
-    #return route_specs
+from django.utils import unittest
+import route_processing
 
 def get_test_adj_list():
     return  {0: {1: 82.38873277805163, 14: 266.6231251167132},
@@ -213,13 +201,13 @@ class TestRemovalOfNodesEdgeFromGraphOutOfRange(unittest.TestCase):
         self.filtered_elevs = [elev for elev in self.elevs if elev is not None]
 
     def test_all_nodes_out_of_range(self):
-        cleared_graph = graph_algorithms.clear_graph_of_nodes_out_of_elev_range(self.adj_list, self.elevs, max(self.elevs)+1, max(self.elevs)+2)
+        cleared_graph = route_processing.clear_graph_of_nodes_out_of_elev_range(self.adj_list, self.elevs, max(self.elevs)+1, max(self.elevs)+2)
         self.assertEquals(len(cleared_graph), 0)
-        cleared_graph = graph_algorithms.clear_graph_of_nodes_out_of_elev_range(self.adj_list, self.elevs, min(self.filtered_elevs)-2, min(self.filtered_elevs)-1)
+        cleared_graph = route_processing.clear_graph_of_nodes_out_of_elev_range(self.adj_list, self.elevs, min(self.filtered_elevs)-2, min(self.filtered_elevs)-1)
         self.assertEquals(len(cleared_graph), 0)
 
     def test_all_nodes_in_range(self):
-        cleared_graph = graph_algorithms.clear_graph_of_nodes_out_of_elev_range(self.adj_list, self.elevs, min(self.filtered_elevs)-1, max(self.elevs)+1)
+        cleared_graph = route_processing.clear_graph_of_nodes_out_of_elev_range(self.adj_list, self.elevs, min(self.filtered_elevs)-1, max(self.elevs)+1)
         self.assertEquals(cleared_graph, self.adj_list)
 
     def test_removal_of_nodes(self):
@@ -227,7 +215,7 @@ class TestRemovalOfNodesEdgeFromGraphOutOfRange(unittest.TestCase):
         els = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
         min = 5
         max = 10
-        cleared_graph = graph_algorithms.clear_graph_of_nodes_out_of_elev_range(a_l, els, min, max)
+        cleared_graph = route_processing.clear_graph_of_nodes_out_of_elev_range(a_l, els, min, max)
         self.assertEquals(cleared_graph, {8:{9:4}, 7:{8:4}})
 
     def test_removal_of_edges(self):
@@ -235,16 +223,84 @@ class TestRemovalOfNodesEdgeFromGraphOutOfRange(unittest.TestCase):
         els = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
         min = 5
         max = 10
-        cleared_graph = graph_algorithms.clear_graph_of_nodes_out_of_elev_range(a_l, els, min, max)
+        cleared_graph = route_processing.clear_graph_of_nodes_out_of_elev_range(a_l, els, min, max)
         self.assertEquals(cleared_graph, {8:{9:4}, 9:{7:6}})
 
     def test_removal_nodes_and_edges(self):
-        a_l = { 8:{9:4}, 9:{2:4,11:6,7:6}, 3:{1:2,3:4} }
+        a_l = {8:{9:4}, 9:{2:4,11:6,7:6}, 3:{1:2,3:4}}
         els = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
         min = 5
         max = 10
-        cleared_graph = graph_algorithms.clear_graph_of_nodes_out_of_elev_range(a_l, els, min, max)
+        cleared_graph = route_processing.clear_graph_of_nodes_out_of_elev_range(a_l, els, min, max)
         self.assertEquals(cleared_graph, {8:{9:4}, 9:{7:6}})
+
+
+class TestGetNodesInRange(unittest.TestCase):
+
+    def test_no_nodes_in_range(self):
+        a_l = {1:{}, 3:{},4:{}, 11:{},12:{}}
+        els = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+        min = 5
+        max = 10
+        nodes = route_processing.get_node_ids_in_range(a_l, els, min, max)
+        self.assertEquals(nodes, [])
+
+    def test_all_nodes_in_range(self):
+        a_l = {5:{},6:{},7:{},8:{},9:{},10:{}}
+        els = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+        min = 5
+        max = 10
+        nodes = route_processing.get_node_ids_in_range(a_l, els, min, max)
+        self.assertEquals(nodes, a_l.keys())
+
+    def test_some_nodes_in_range(self):
+        a_l = {4:{},5:{},6:{},7:{},8:{},9:{},10:{},11:{}}
+        els = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+        min = 5
+        max = 10
+        nodes = route_processing.get_node_ids_in_range(a_l, els, min, max)
+        self.assertEquals(nodes, range(5,11))
+
+class TestShortestDistancetoNodesinXY(unittest.TestCase):
+
+    def test_no_nodes_in_either_X_Y_reachable(self):
+        node_id = 0
+        cleared_graph = {0:{10:4}, 10:{9:1}, 9:{10:1}}
+        nodes_in_X = [1,2,3]
+        nodes_in_Y = [4,5,6]
+        (dist_2_X, dist_2_Y)=route_processing.get_shortest_distance_to_X_Y(node_id, cleared_graph, nodes_in_X, nodes_in_Y)
+        self.assertEquals((dist_2_X, dist_2_Y),(None, None))
+
+    def test_node_is_in_X_or_Y_so_dist_is_zero(self):
+        node_id = 0
+        cleared_graph = {0:{1:4}, 1:{0:1}}
+        nodes_in_X = [0,1,2,3]
+        nodes_in_Y = [4,5,6]
+        (dist_2_X, dist_2_Y)=route_processing.get_shortest_distance_to_X_Y(node_id, cleared_graph, nodes_in_X, nodes_in_Y)
+        self.assertEquals((dist_2_X, dist_2_Y),(0, None))
+        node_id = 0
+        cleared_graph = {0:{6:4}, 6:{0:1}}
+        nodes_in_X = [1,2,3]
+        nodes_in_Y = [0,4,5,6]
+        (dist_2_X, dist_2_Y)=route_processing.get_shortest_distance_to_X_Y(node_id, cleared_graph, nodes_in_X, nodes_in_Y)
+        self.assertEquals((dist_2_X, dist_2_Y),(None, 0))
+
+    def test_node_in_X_reachable(self):
+        node_id = 0
+        cleared_graph = {0:{1:4}, 1:{0:1}}
+        nodes_in_X = [1,2,3]
+        nodes_in_Y = [4,5,6]
+        (dist_2_X, dist_2_Y)=route_processing.get_shortest_distance_to_X_Y(node_id, cleared_graph, nodes_in_X, nodes_in_Y)
+        self.assertEquals((dist_2_X, dist_2_Y),(4, None))
+
+    def test_node_in_Y_reachable(self):
+        node_id = 0
+        cleared_graph = {0:{5:9}, 5:{0:8}}
+        nodes_in_X = [1,2,3]
+        nodes_in_Y = [4,5,6]
+        (dist_2_X, dist_2_Y)=route_processing.get_shortest_distance_to_X_Y(node_id, cleared_graph, nodes_in_X, nodes_in_Y)
+        self.assertEquals((dist_2_X, dist_2_Y),(None, 9))
+
 
 if __name__ == "__main__":
     unittest.main()

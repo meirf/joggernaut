@@ -3,12 +3,8 @@ from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from polls.models import Choice, Poll, Node
-from polls.graph_preparation import route_processing
-from collections import namedtuple
+from polls.graph_preparation import route_processing, route_specification_data
 import json
-
-RouteSpecs = namedtuple('RouteSpecs', 'source_node dist_min dist_max elev_min_a '
-                                              'elev_min_b elev_max_a elev_max_b')
 
 def ajax_test(request):
     if request.method == 'GET' and request.is_ajax():
@@ -32,7 +28,7 @@ def route_solutions(request):
         e = request.GET['elev_min_b']
         f = request.GET['elev_max_a']
         g = request.GET['elev_max_b']
-        input_specs = RouteSpecs(int(a), int(b), int(c), int(d), int(e), int(f), int(g))
+        input_specs = route_specification_data.RouteSpecs(int(a), int(b), int(c), int(d), int(e), int(f), int(g))
         route_response = route_processing.main_route_calculator(input_specs)
         return HttpResponse(json.dumps(route_response))
 
