@@ -24,7 +24,7 @@ from collections import defaultdict
         (Note: to convert this dict's values to coords, use "get_coords_version_of_path"
         and tuple the result)
     """
-def random_walk_wrapper(un_cleared_graph, source_node, elevs, route_specs, number_of_ranges=2, paths_per_range=1):
+def random_walk_wrapper(un_cleared_graph, source_node, elevs, route_specs, number_of_ranges=2, paths_per_range=1, coords=None):
     cleared_graph = route_processing.clear_graph_of_nodes_out_of_elev_range(un_cleared_graph, elevs, route_specs.elev_min_a, route_specs.elev_max_b)
     closest_distances = route_processing.compute_closest_distance_values_at_each_node(cleared_graph, elevs, route_specs)
     ranges = get_ranges(route_specs.dist_min, route_specs.dist_max, number_of_ranges)
@@ -33,7 +33,10 @@ def random_walk_wrapper(un_cleared_graph, source_node, elevs, route_specs, numbe
         for count in range(paths_per_range):#iterate paths_per_range times
             path = random_walk(cleared_graph, source_node, closest_distances, r[0], r[1])
             if path is not None:
-               routes[r].add(tuple(path))
+                if coords is None:
+                    routes[r].add(tuple(path))
+                else:
+                    routes[r].add(tuple([coords[node] for node in path]))
     return (ranges, routes)
 
 def get_ranges(min_dist, max_dist, number_of_ranges=2):

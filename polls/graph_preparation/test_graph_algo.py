@@ -463,21 +463,39 @@ class TestRandomWalkWithRangesMultiplicity(unittest.TestCase):
         (ranges, routes) = graph_algorithms.random_walk_wrapper(un_cleared_graph, source_node, elevs, route_specs, 2, 2)
         self.assertEquals(ranges, [(3,3)])
         self.assertEquals(routes, {(3,3):{(0,1,2,3)}})
-
         source_node = 0
-        dist_min = 3
-        dist_max = 3
+        dist_min = 2
+        dist_max = 4
         elev_min_a = 20
         elev_min_b = 30
         elev_max_a = 50
         elev_max_b = 60
-        un_cleared_graph = {0:{1:1}, 1:{2:1}, 2:{3:1,4:1}, 3:{0:1}, 4:{0:1}}
-        elevs = [40, 40, 25, 55, 55]
+        un_cleared_graph = {0:{1:1}, 1:{2:1}, 2:{3:1}, 3:{0:1}}
+        elevs = [40, 40, 25, 55]
         route_specs = route_specification_data.RouteSpecs(source_node, dist_min, dist_max, elev_min_a,elev_min_b, elev_max_a, elev_max_b)
-        (ranges, routes) = graph_algorithms.random_walk_wrapper(un_cleared_graph, source_node, elevs, route_specs, 2, 2)
-        #self.assertEquals(ranges, [(3,3)])
-        #self.assertEquals(routes, {(3,3):{(0,1,2,3)}})
+        (ranges, routes) = graph_algorithms.random_walk_wrapper(un_cleared_graph, source_node, elevs, route_specs, 3, 1)
+        self.assertEquals(ranges, [(2,3),(3,4)])
+        self.assertEquals(routes, {(2,3):{(0,1,2,3)},
+                                   (3,4):{(0,1,2,3,0)}
+                                  })
 
+    def test_getting_coords_not_node_ids(self):
+        coords = [(1,2),(3,4),(5,6),(7,8)]
+        source_node = 0
+        dist_min = 2
+        dist_max = 4
+        elev_min_a = 20
+        elev_min_b = 30
+        elev_max_a = 50
+        elev_max_b = 60
+        un_cleared_graph = {0:{1:1}, 1:{2:1}, 2:{3:1}, 3:{0:1}}
+        elevs = [40, 40, 25, 55]
+        route_specs = route_specification_data.RouteSpecs(source_node, dist_min, dist_max, elev_min_a,elev_min_b, elev_max_a, elev_max_b)
+        (ranges, routes) = graph_algorithms.random_walk_wrapper(un_cleared_graph, source_node, elevs, route_specs, 3, 1, coords)
+        self.assertEquals(ranges, [(2,3),(3,4)])
+        self.assertEquals(routes, {(2,3):{((1,2),(3,4),(5,6),(7,8))},
+                                   (3,4):{((1,2),(3,4),(5,6),(7,8),(1,2))}
+                                  })
 
 if __name__ == "__main__":
     unittest.main()
