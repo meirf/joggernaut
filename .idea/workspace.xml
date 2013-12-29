@@ -48,7 +48,7 @@
       <file leaf-file-name="graph_algorithms.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/polls/graph_preparation/graph_algorithms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="171" column="32" selection-start="5940" selection-end="5940" vertical-scroll-proportion="0.0" vertical-offset="4610" max-vertical-offset="5597">
+            <state line="182" column="4" selection-start="6303" selection-end="6426" vertical-scroll-proportion="0.0" vertical-offset="4610" max-vertical-offset="5597">
               <folding />
             </state>
           </provider>
@@ -57,7 +57,7 @@
       <file leaf-file-name="test_graph_algo.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/polls/graph_preparation/test_graph_algo.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="219" column="5" selection-start="9190" selection-end="9190" vertical-scroll-proportion="0.9349046" vertical-offset="124" max-vertical-offset="1131">
+            <state line="218" column="48" selection-start="9398" selection-end="9398" vertical-scroll-proportion="0.9349046" vertical-offset="95" max-vertical-offset="2001">
               <folding>
                 <element signature="e#28#43#0" expanded="true" />
                 <element signature="e#437#6853#0" expanded="false" />
@@ -630,14 +630,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/polls/graph_preparation/graph_algorithms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="171" column="32" selection-start="5940" selection-end="5940" vertical-scroll-proportion="0.0" vertical-offset="4610" max-vertical-offset="5597">
+        <state line="182" column="4" selection-start="6303" selection-end="6426" vertical-scroll-proportion="0.0" vertical-offset="4610" max-vertical-offset="5597">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/polls/graph_preparation/test_graph_algo.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="219" column="5" selection-start="9190" selection-end="9190" vertical-scroll-proportion="0.9349046" vertical-offset="124" max-vertical-offset="1131">
+        <state line="218" column="48" selection-start="9398" selection-end="9398" vertical-scroll-proportion="0.9349046" vertical-offset="95" max-vertical-offset="2001">
           <folding>
             <element signature="e#28#43#0" expanded="true" />
             <element signature="e#437#6853#0" expanded="false" />

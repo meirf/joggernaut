@@ -210,11 +210,41 @@ class TestRemovalOfNodesEdgeFromGraphOutOfRange(unittest.TestCase):
     def setUp(self):
         self.adj_list = get_test_adj_list()
         self.elevs = get_test_elevs()
-        self.route_specs = get_test_route_specs()
+        self.filtered_elevs = [elev for elev in self.elevs if elev is not None]
 
     def test_all_nodes_out_of_range(self):
         cleared_graph = graph_algorithms.clear_graph_of_nodes_out_of_elev_range(self.adj_list, self.elevs, max(self.elevs)+1, max(self.elevs)+2)
         self.assertEquals(len(cleared_graph), 0)
+        cleared_graph = graph_algorithms.clear_graph_of_nodes_out_of_elev_range(self.adj_list, self.elevs, min(self.filtered_elevs)-2, min(self.filtered_elevs)-1)
+        self.assertEquals(len(cleared_graph), 0)
+
+    def test_all_nodes_in_range(self):
+        cleared_graph = graph_algorithms.clear_graph_of_nodes_out_of_elev_range(self.adj_list, self.elevs, min(self.filtered_elevs)-1, max(self.elevs)+1)
+        self.assertEquals(cleared_graph, self.adj_list)
+
+    def test_removal_of_nodes(self):
+        a_l = {1:{2:2,3:3}, 8:{9:4}, 7:{8:4}, 12:{8:4} }
+        els = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+        min = 5
+        max = 10
+        cleared_graph = graph_algorithms.clear_graph_of_nodes_out_of_elev_range(a_l, els, min, max)
+        self.assertEquals(cleared_graph, {8:{9:4}, 7:{8:4}})
+
+    def test_removal_of_edges(self):
+        a_l = { 8:{9:4}, 9:{2:4,11:6,7:6}}
+        els = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+        min = 5
+        max = 10
+        cleared_graph = graph_algorithms.clear_graph_of_nodes_out_of_elev_range(a_l, els, min, max)
+        self.assertEquals(cleared_graph, {8:{9:4}, 9:{7:6}})
+
+    def test_removal_nodes_and_edges(self):
+        a_l = { 8:{9:4}, 9:{2:4,11:6,7:6}, 3:{1:2,3:4} }
+        els = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+        min = 5
+        max = 10
+        cleared_graph = graph_algorithms.clear_graph_of_nodes_out_of_elev_range(a_l, els, min, max)
+        self.assertEquals(cleared_graph, {8:{9:4}, 9:{7:6}})
 
 if __name__ == "__main__":
     unittest.main()
