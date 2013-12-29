@@ -6,6 +6,7 @@ from __future__ import generators
 import random
 import route_processing
 import numpy
+from collections import defaultdict
 
 """ Clears graph of nodes outside of [X.a, Y.b]
     Gets closest distances for all nodes to nodes in X and Y
@@ -23,17 +24,23 @@ import numpy
         (Note: to convert this dict's values to coords, use "get_coords_version_of_path"
         and tuple the result)
     """
-def random_walk_wrapper(un_cleared_graph, source_node, elevs, route_specs, ranges=1, paths_per_range=1):
+def random_walk_wrapper(un_cleared_graph, source_node, elevs, route_specs, number_of_ranges=2, paths_per_range=1):
     cleared_graph = route_processing.clear_graph_of_nodes_out_of_elev_range(un_cleared_graph, elevs, route_specs.elev_min_a, route_specs.elev_max_b)
     closest_distances = route_processing.compute_closest_distance_values_at_each_node(cleared_graph, elevs, route_specs)
-    random_walk(cleared_graph, source_node, closest_distances, route_specs.dist_min, route_specs.dist_max)
+    ranges = get_ranges(route_specs.dist_min, route_specs.dist_max, number_of_ranges)
+    routes = defaultdict(set)
+    for r in ranges:
+        for count in range(paths_per_range):#iterate paths_per_range times
+            path = random_walk(cleared_graph, source_node, closest_distances, r[0], r[1])
+            if path is not None:
+               routes[r].add(tuple(path))
+    return (ranges, routes)
 
-
-def get_ranges(min_dist, max_dist, number_of_ranges=1):
+def get_ranges(min_dist, max_dist, number_of_ranges=2):
     line_points = numpy.linspace(min_dist, max_dist, number_of_ranges)
     ranges = []
     for i in range(0, len(line_points)-1):
-             ranges.append((line_points[i],line_points[i+1]))
+         ranges.append((line_points[i],line_points[i+1]))
     return ranges
 
 """ Accumulate path of nodes, P, s.t.
