@@ -392,14 +392,14 @@ class TestRandomWalk(unittest.TestCase):
         closest_distances = {0: (None, None)}
         dist_min = 10
         dist_max = 30
-        path = graph_algorithms.random_walk(cleared_graph, source_node, closest_distances, dist_min, dist_max,[])
+        path = graph_algorithms.random_walk(cleared_graph, source_node, closest_distances, dist_min, dist_max)
         self.assertEquals(path, None)
         cleared_graph = {0:{1:5}, 1:{0:5}}
         source_node = 0
         closest_distances = {0: (5, 5), 1: (0,0)}
         dist_min = 10
         dist_max = 30
-        path = graph_algorithms.random_walk(cleared_graph, source_node, closest_distances, dist_min, dist_max,[])
+        path = graph_algorithms.random_walk(cleared_graph, source_node, closest_distances, dist_min, dist_max)
         self.assertEquals(path, None)
 
     def test_path_length_one(self):
@@ -408,18 +408,16 @@ class TestRandomWalk(unittest.TestCase):
         closest_distances = {0: (0, 0), 1: (0,0)}
         dist_min = 0
         dist_max = 3
-        path = graph_algorithms.random_walk(cleared_graph, source_node, closest_distances, dist_min, dist_max,[])
+        path = graph_algorithms.random_walk(cleared_graph, source_node, closest_distances, dist_min, dist_max)
         self.assertEquals(len(path), 1)
 
-    #        1
-    #    0      2:X,Y
     def test_path_length_few(self):
         cleared_graph = {0:{1:1}, 1:{2:1}, 2:{0:1}}
         source_node = 0
         closest_distances = {0: (2, 2), 1: (1, 1), 2:(0,0)}
         dist_min = 2
         dist_max = 2
-        path = graph_algorithms.random_walk(cleared_graph, source_node, closest_distances, dist_min, dist_max,[])
+        path = graph_algorithms.random_walk(cleared_graph, source_node, closest_distances, dist_min, dist_max)
         self.assertEquals(len(path), 3)
 
 if __name__ == "__main__":

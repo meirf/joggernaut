@@ -5,15 +5,36 @@ from __future__ import generators
 
 import random
 import route_processing
+import numpy
 
 """ Clears graph of nodes outside of [X.a, Y.b]
     Gets closest distances for all nodes to nodes in X and Y
-    Calls random walk with this data.
+    Calls random walk with this data:
+        Splits up [X.a,Y.b] into R ranges.
+        For each range in R, gets up to P paths.
+            If get None as a result advance an iteration and
+            don't include that in the result.
+
+    We return a list of ranges
+        where each range is a tuple of the form (min_dist, max_dist)
+    and a dictionary
+        where each key is tuple range and each value
+        is a set of tuples, each of which is a tupled list of nodes
+        (Note: to convert this dict's values to coords, use "get_coords_version_of_path"
+        and tuple the result)
     """
-def random_walk_wrapper(un_cleared_graph, source_node, elevs, route_specs, coords, ranges=1, paths_per_range=1):
+def random_walk_wrapper(un_cleared_graph, source_node, elevs, route_specs, ranges=1, paths_per_range=1):
     cleared_graph = route_processing.clear_graph_of_nodes_out_of_elev_range(un_cleared_graph, elevs, route_specs.elev_min_a, route_specs.elev_max_b)
     closest_distances = route_processing.compute_closest_distance_values_at_each_node(cleared_graph, elevs, route_specs)
     random_walk(cleared_graph, source_node, closest_distances, route_specs.dist_min, route_specs.dist_max)
+
+
+def get_ranges(min_dist, max_dist, number_of_ranges=1):
+    line_points = numpy.linspace(min_dist, max_dist, number_of_ranges)
+    ranges = []
+    for i in range(0, len(line_points)-1):
+             ranges.append((line_points[i],line_points[i+1]))
+    return ranges
 
 """ Accumulate path of nodes, P, s.t.
     a. dist_min <= Sum(path) <= dist_max
@@ -51,12 +72,11 @@ def random_walk_wrapper(un_cleared_graph, source_node, elevs, route_specs, coord
         c. We will filter out any node that is equal to the node
            2 nodes prior if the path length so far is >1.
     """
-def random_walk(cleared_graph, source_node, closest_distances, dist_min, dist_max, coords, path_coords=False):
+def random_walk(cleared_graph, source_node, closest_distances, dist_min, dist_max):
     running_distance = 0
     path = [source_node]
     seen_X = True if closest_distances[source_node][0]==0 else False
     seen_Y = True if closest_distances[source_node][1]==0 else False
-
     while True:
         candidate_nodes = cleared_graph[path[-1]].keys()
         candidate_nodes[:] = [node for node in candidate_nodes if is_viable(node, running_distance, dist_max, path, cleared_graph, seen_X, seen_Y, closest_distances)]
@@ -65,10 +85,7 @@ def random_walk(cleared_graph, source_node, closest_distances, dist_min, dist_ma
             running_distance += cleared_graph[path[-1]][new_node]
             seen_X = True if closest_distances[new_node][0]==0 else False
             seen_Y = True if closest_distances[new_node][1]==0 else False
-            if path_coords:
-                path.append(coords[new_node])
-            else:
-                path.append(new_node)
+            path.append(new_node)
         else:
             break
 

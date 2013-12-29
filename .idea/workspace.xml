@@ -26,20 +26,18 @@
       <file leaf-file-name="route_processing.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/polls/graph_preparation/route_processing.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="125" column="84" selection-start="5404" selection-end="5484" vertical-scroll-proportion="0.0" vertical-offset="3212" max-vertical-offset="4437">
+            <state line="72" column="30" selection-start="3439" selection-end="3465" vertical-scroll-proportion="0.0" vertical-offset="1566" max-vertical-offset="4582">
               <folding>
                 <element signature="e#28#63#0" expanded="true" />
-                <marker date="1388293653000" expanded="true" signature="5237:5399" placeholder="&quot;&quot;&quot;...&quot;&quot;&quot;" />
-                <marker date="1388293653000" expanded="true" signature="5484:5911" placeholder="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="graph_algorithms.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="graph_algorithms.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/polls/graph_preparation/graph_algorithms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="54" column="24" selection-start="2384" selection-end="2384" vertical-scroll-proportion="0.0" vertical-offset="1392" max-vertical-offset="7627">
+            <state line="36" column="17" selection-start="1637" selection-end="1637" vertical-scroll-proportion="0.87593585" vertical-offset="225" max-vertical-offset="8120">
               <folding>
                 <element signature="e#85#118#0" expanded="true" />
               </folding>
@@ -47,10 +45,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test_graph_algo.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="test_graph_algo.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/polls/graph_preparation/test_graph_algo.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="420" column="0" selection-start="17836" selection-end="17836" vertical-scroll-proportion="0.81390375" vertical-offset="6025" max-vertical-offset="7105">
+            <state line="394" column="0" selection-start="16790" selection-end="16790" vertical-scroll-proportion="0.0" vertical-offset="5684" max-vertical-offset="7047">
               <folding>
                 <element signature="e#28#61#0" expanded="true" />
                 <element signature="e#172#6588#0" expanded="false" />
@@ -83,9 +81,9 @@
         <option value="$PROJECT_DIR$/polls/views.py" />
         <option value="$PROJECT_DIR$/polls/models.py" />
         <option value="$PROJECT_DIR$/mysite/settings.py" />
+        <option value="$PROJECT_DIR$/polls/graph_preparation/test_graph_algo.py" />
         <option value="$PROJECT_DIR$/polls/graph_preparation/route_processing.py" />
         <option value="$PROJECT_DIR$/polls/graph_preparation/graph_algorithms.py" />
-        <option value="$PROJECT_DIR$/polls/graph_preparation/test_graph_algo.py" />
       </list>
     </option>
   </component>
@@ -613,17 +611,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/polls/graph_preparation/route_processing.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="125" column="84" selection-start="5404" selection-end="5484" vertical-scroll-proportion="0.0" vertical-offset="3212" max-vertical-offset="4437">
-          <folding>
-            <element signature="e#28#63#0" expanded="true" />
-            <marker date="1388293653000" expanded="true" signature="5237:5399" placeholder="&quot;&quot;&quot;...&quot;&quot;&quot;" />
-            <marker date="1388293653000" expanded="true" signature="5484:5911" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/polls/graph_preparation/route_specification_data.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="6" column="24" selection-start="214" selection-end="222" vertical-scroll-proportion="0.18354431" vertical-offset="0" max-vertical-offset="948">
@@ -631,22 +618,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/polls/graph_preparation/graph_algorithms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="54" column="24" selection-start="2384" selection-end="2384" vertical-scroll-proportion="0.0" vertical-offset="1392" max-vertical-offset="7627">
-          <folding>
-            <element signature="e#85#118#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/polls/graph_preparation/test_graph_algo.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="420" column="0" selection-start="17836" selection-end="17836" vertical-scroll-proportion="0.81390375" vertical-offset="6025" max-vertical-offset="7105">
+        <state line="394" column="0" selection-start="16790" selection-end="16790" vertical-scroll-proportion="0.0" vertical-offset="5684" max-vertical-offset="7047">
           <folding>
             <element signature="e#28#61#0" expanded="true" />
             <element signature="e#172#6588#0" expanded="false" />
             <element signature="e#6616#8430#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/polls/graph_preparation/route_processing.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="72" column="30" selection-start="3439" selection-end="3465" vertical-scroll-proportion="0.0" vertical-offset="1566" max-vertical-offset="4582">
+          <folding>
+            <element signature="e#28#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/polls/graph_preparation/graph_algorithms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="17" selection-start="1637" selection-end="1637" vertical-scroll-proportion="0.87593585" vertical-offset="225" max-vertical-offset="8120">
+          <folding>
+            <element signature="e#85#118#0" expanded="true" />
           </folding>
         </state>
       </provider>

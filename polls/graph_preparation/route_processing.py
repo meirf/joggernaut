@@ -68,6 +68,11 @@ def check_source_node_set(route_specs):
         raise Exception("Please choose a starting coordinate from the drop down list")
 
 
+""" Given path and coords, get coords for each node id in path
+    """
+def get_coords_version_of_path(path, coords):
+    return [coords[node_id] for node_id in path]
+
 """ Before we find for each node
     the shortest path distance to node in X
     and shortest path distance to node in Y
