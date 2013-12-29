@@ -2,6 +2,7 @@ __author__ = 'meirfischer'
 
 from django.utils import unittest
 import route_processing
+import route_specification_data
 
 def get_test_adj_list():
     return  {0: {1: 82.38873277805163, 14: 266.6231251167132},
@@ -301,6 +302,36 @@ class TestShortestDistancetoNodesinXY(unittest.TestCase):
         (dist_2_X, dist_2_Y)=route_processing.get_shortest_distance_to_X_Y(node_id, cleared_graph, nodes_in_X, nodes_in_Y)
         self.assertEquals((dist_2_X, dist_2_Y),(None, 9))
 
+
+class TestGatherAllClosestDistanceValues(unittest.TestCase):
+
+    def test_values_for_all_nodes_equal_weighted_loop(self):
+        cleared_graph = {0:{1:1,2:1}, 1:{2:1,0:1}, 2:{0:1,1:1}}
+        elevs = [7, 15, 25]
+        route_specs = route_specification_data.RouteSpecs(0, 100, 200, 5, 10, 20, 30)
+        distances = route_processing.compute_closest_distance_values_at_each_node(cleared_graph, elevs, route_specs)
+        self.assertEquals(distances, {0:(0,1),1:(1,1),2:(1,0)})
+
+    def test_values_for_all_nodes_unequal_weighted_loop(self):
+        cleared_graph = {0:{1:1,2:2}, 1:{2:1,0:4}, 2:{0:2,1:1}}
+        elevs = [7, 15, 25]
+        route_specs = route_specification_data.RouteSpecs(0, 100, 200, 5, 10, 20, 30)
+        distances = route_processing.compute_closest_distance_values_at_each_node(cleared_graph, elevs, route_specs)
+        self.assertEquals(distances, {0:(0,2),1:(3,1),2:(2,0)})
+
+    def test_some_none_distances(self):
+        cleared_graph = {0:{1:1,2:2}, 1:{2:1,0:4}, 2:{0:2,1:1}}
+        elevs = [7, 15, 18]
+        route_specs = route_specification_data.RouteSpecs(0, 100, 200, 5, 10, 20, 30)
+        distances = route_processing.compute_closest_distance_values_at_each_node(cleared_graph, elevs, route_specs)
+        self.assertEquals(distances, {0:(0,None),1:(3,None),2:(2,None)})
+
+    def test_all_none_distances(self):
+        cleared_graph = {0:{1:1,2:2}, 1:{2:1,0:4}, 2:{0:2,1:1}}
+        elevs = [12, 15, 18]
+        route_specs = route_specification_data.RouteSpecs(0, 100, 200, 5, 10, 20, 30)
+        distances = route_processing.compute_closest_distance_values_at_each_node(cleared_graph, elevs, route_specs)
+        self.assertEquals(distances, {0:(None,None),1:(None,None),2:(None,None)})
 
 if __name__ == "__main__":
     unittest.main()

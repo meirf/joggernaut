@@ -4,6 +4,7 @@ from polls.models import Node, Edge
 import db_graph_2_mem
 import graph_algorithms
 import sys
+from collections import defaultdict
 
 elevs = None
 adj_list = None
@@ -117,7 +118,18 @@ def get_shortest_distance_to_X_Y(node_id, cleared_graph, nodes_in_X, nodes_in_Y)
     return (None if shortest_to_X==sys.maxint else shortest_to_X,
             None if shortest_to_Y==sys.maxint else shortest_to_Y)
 
+""" Given cleared graph, G', and route specs, R
+    We compute a dictionary of tuples:
+        node_id -> (closest distance to node in X, closest distance to node in Y)
 
+    """
+def compute_closest_distance_values_at_each_node(cleared_graph, elevs, route_specs):
+    closest_distances = defaultdict(tuple)
+    nodes_in_X = get_node_ids_in_range(cleared_graph, elevs, route_specs.elev_min_a, route_specs.elev_min_b)
+    nodes_in_Y = get_node_ids_in_range(cleared_graph, elevs, route_specs.elev_max_a, route_specs.elev_max_b)
+    for node in cleared_graph:
+        closest_distances[node] = get_shortest_distance_to_X_Y(node,cleared_graph,nodes_in_X, nodes_in_Y)
+    return closest_distances
 
 def main_route_calculator(route_specs):
     response = {}
