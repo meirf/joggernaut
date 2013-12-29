@@ -3,6 +3,7 @@
 
 from __future__ import generators
 
+
 def Dijkstra(G, start, end=None):
 	"""
 	Find shortest paths from the start vertex to all
@@ -157,3 +158,31 @@ too large, to avoid memory leakage.'''
             self[key] = val
         return self[key]
 
+""" Before we find for each node
+    the shortest path distance to node in X
+    and shortest path distance to node in Y
+    we must ensure that these paths use only
+    nodes for which X.a<=node.elev<=Y.b
+    This method returns a copy of the graph
+    with removal of all nodes whose elevation
+    is out of this range and all edges
+    that touch these nodes.
+    """
+def clear_graph_of_nodes_out_of_elev_range(adj_list, elevs, min, max):
+    graph_copy = adj_list.copy()
+    for node_id, edges in graph_copy.items():
+        if elevs[node_id]>max or elevs[node_id]<min:
+            del graph_copy[node_id]
+        else:
+            for neighbor in edges.keys():
+                if elevs[neighbor]>max or elevs[neighbor]<min:
+                    del graph_copy[node_id][neighbor]
+    return graph_copy
+
+if __name__ == "__main__":
+    adj_list = {1:{2:2,3:3}, 8:{9:4}, 7:{8:4,2:5}}
+    elevs = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+    min = 5
+    max = 10
+    clear_graph_of_nodes_out_of_elev_range(adj_list, elevs, min, max)
+    print adj_list

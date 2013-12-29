@@ -7,7 +7,8 @@ from polls.graph_preparation import route_processing
 from collections import namedtuple
 import json
 
-
+RouteSpecs = namedtuple('RouteSpecs', 'source_node dist_min dist_max elev_min_a '
+                                              'elev_min_b elev_max_a elev_max_b')
 
 def ajax_test(request):
     if request.method == 'GET' and request.is_ajax():
@@ -24,8 +25,6 @@ def route_index(request):
 
 def route_solutions(request):
     if request.method == 'GET' and request.is_ajax():
-        RouteSpecs = namedtuple('RouteSpecs', 'source_node dist_min dist_max elev_min_a '
-                                              'elev_min_b elev_max_a elev_max_b')
         a = request.GET['source_node_id']
         b = request.GET['dist_min']
         c = request.GET['dist_max']

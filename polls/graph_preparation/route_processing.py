@@ -73,6 +73,7 @@ def main_route_calculator(route_specs):
         response["input_status"] = "BadInput"
         response["response_data"] = e.message
         return response
-    #response["input_status"] = "ActionableInput"
-    #response["response_data"] = str(check_nodes_in_ranges_reachable_within_distance(route_specs))
-    #return response
+    ensure_set_graph_from_db()
+    response["input_status"] = "???"
+    response["response_data"] = "Past checks"
+    return response
