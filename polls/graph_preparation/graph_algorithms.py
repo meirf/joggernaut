@@ -3,6 +3,81 @@
 
 from __future__ import generators
 
+import random
+import route_processing
+
+""" Clears graph of nodes outside of [X.a, Y.b]
+    Gets closest distances for all nodes to nodes in X and Y
+    Calls random walk with this data.
+    """
+def random_walk_wrapper(un_cleared_graph, source_node, elevs, route_specs):
+    cleared_graph = route_processing.clear_graph_of_nodes_out_of_elev_range(un_cleared_graph, elevs, route_specs.elev_min_a, route_specs.elev_max_b)
+    closest_distances = route_processing.compute_closest_distance_values_at_each_node(cleared_graph, elevs, route_specs)
+    random_walk(cleared_graph, source_node, closest_distances, route_specs.dist_min, route_specs.dist_max)
+
+""" Accumulate path of nodes, P, s.t.
+    a. dist_min <= Sum(path) <= dist_max
+    b. P contains at least a node in X
+       and a node in Y.
+    c. For any node sequence in the path
+       node_i, node_j, node_k
+       node_k != node_i
+    d. No node in P is outside of [X.a, Y.b]
+       Note: we assume that the graph given
+       contains no such node since it was cleared
+       of these nodes by a prior method.
+    e. If at any point there are >1 viable
+       nodes to choose from, the next node
+       is choosen pseudorandomly.
+
+    Elaboration on a. and b.:
+        The candidate of next nodes starts as
+        any of that node's neighbors, but is
+        progressively filtered.
+        As we traverse, we may come to a point
+        where not all criteria can be met.
+        If we get to such a point:
+        if running_distance < dist_min, else we"ll return
+        running_path.
+        Specifically,
+        a. We will filter from the candidate set of next
+           viable nodes any node whose addition
+           will put us over the dist_max
+        b. We will filter out any node which
+           does not have a distance (is None) to
+           node in X or Y depending on whether we've
+           seen such nodes yet. Once we've
+           seen a node in X or Y, we don't care about this.
+        c. We will filter out any node that is equal to the node
+           2 nodes prior if the path length so far is >1.
+    """
+def random_walk(cleared_graph, source_node, closest_distances, dist_min, dist_max):
+    running_distance = 0
+    path = [source_node]
+    seen_X = True if closest_distances[source_node][0]==0 else False
+    seen_Y = True if closest_distances[source_node][1]==0 else False
+
+    while True:
+        candidate_nodes = cleared_graph[path[-1]].keys()
+        candidate_nodes[:] = [node for node in candidate_nodes if is_viable(node, seen_X, seen_Y, dist_max, closest_distances)]
+        if len(candidate_nodes) > 0:
+            new_node = random.choice(candidate_nodes)
+            running_distance += cleared_graph[path[-1]][new_node]
+            seen_X = True if closest_distances[new_node][0]==0 else False
+            seen_Y = True if closest_distances[new_node][1]==0 else False
+            path.append(new_node)
+        else:
+            break
+
+    if dist_min <= running_distance <= dist_max:
+       return path
+    else:
+        return None
+
+""" Filter based on false see above method description
+    """
+def is_viable(node):
+    return True
 
 def Dijkstra(G, start, end=None):
 	"""

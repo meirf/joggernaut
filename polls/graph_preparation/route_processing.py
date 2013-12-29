@@ -118,7 +118,7 @@ def get_shortest_distance_to_X_Y(node_id, cleared_graph, nodes_in_X, nodes_in_Y)
     return (None if shortest_to_X==sys.maxint else shortest_to_X,
             None if shortest_to_Y==sys.maxint else shortest_to_Y)
 
-""" Given cleared graph, G', and route specs, R
+""" Given G', and route specs, R
     We compute a dictionary of tuples:
         node_id -> (closest distance to node in X, closest distance to node in Y)
 
