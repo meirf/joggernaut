@@ -3,6 +3,7 @@ __author__ = 'meirfischer'
 from django.utils import unittest
 import route_processing
 import route_specification_data
+import graph_algorithms
 
 def get_test_adj_list():
     return  {0: {1: 82.38873277805163, 14: 266.6231251167132},
@@ -332,6 +333,94 @@ class TestGatherAllClosestDistanceValues(unittest.TestCase):
         route_specs = route_specification_data.RouteSpecs(0, 100, 200, 5, 10, 20, 30)
         distances = route_processing.compute_closest_distance_values_at_each_node(cleared_graph, elevs, route_specs)
         self.assertEquals(distances, {0:(None,None),1:(None,None),2:(None,None)})
+
+class TestNodeViability(unittest.TestCase):
+
+    def test_criteria_a(self):
+        node = 1
+        running_distance= 10
+        dist_max = 20
+        path = [0]
+        cleared_graph = {0:{1:20}}
+        seen_X = False
+        seen_Y = False
+        closest_distances = {}
+        viability =  graph_algorithms.is_viable(node, running_distance, dist_max, path, cleared_graph, seen_X, seen_Y, closest_distances)
+        self.assertEquals(viability, False)
+
+    def test_criteria_b(self):
+        node = 1
+        running_distance= 10
+        dist_max = 20
+        path = [0]
+        cleared_graph = {0:{1:5}}
+        seen_X = False
+        seen_Y = False
+        closest_distances = {1:(None, None)}
+        viability =  graph_algorithms.is_viable(node, running_distance, dist_max, path, cleared_graph, seen_X, seen_Y, closest_distances)
+        self.assertEquals(viability, False)
+
+    def test_criteria_c(self):
+        node = 1
+        running_distance= 10
+        dist_max = 20
+        path = [1,0]
+        cleared_graph = {0:{1:5}}
+        seen_X = False
+        seen_Y = False
+        closest_distances = {1:(5, 5)}
+        viability =  graph_algorithms.is_viable(node, running_distance, dist_max, path, cleared_graph, seen_X, seen_Y, closest_distances)
+        self.assertEquals(viability, False)
+
+    def test_sat_all_criteria(self):
+        node = 1
+        running_distance= 10
+        dist_max = 20
+        path = [0]
+        cleared_graph = {0:{1:5}}
+        seen_X = False
+        seen_Y = False
+        closest_distances = {1:(5, 5)}
+        viability =  graph_algorithms.is_viable(node, running_distance, dist_max, path, cleared_graph, seen_X, seen_Y, closest_distances)
+        self.assertEquals(viability, True)
+
+class TestRandomWalk(unittest.TestCase):
+
+    def test_no_path(self):
+        cleared_graph = {0:{}}
+        source_node = 0
+        closest_distances = {0: (None, None)}
+        dist_min = 10
+        dist_max = 30
+        path = graph_algorithms.random_walk(cleared_graph, source_node, closest_distances, dist_min, dist_max,[])
+        self.assertEquals(path, None)
+        cleared_graph = {0:{1:5}, 1:{0:5}}
+        source_node = 0
+        closest_distances = {0: (5, 5), 1: (0,0)}
+        dist_min = 10
+        dist_max = 30
+        path = graph_algorithms.random_walk(cleared_graph, source_node, closest_distances, dist_min, dist_max,[])
+        self.assertEquals(path, None)
+
+    def test_path_length_one(self):
+        cleared_graph = {0:{1:5}, 1:{0:5}}
+        source_node = 0
+        closest_distances = {0: (0, 0), 1: (0,0)}
+        dist_min = 0
+        dist_max = 3
+        path = graph_algorithms.random_walk(cleared_graph, source_node, closest_distances, dist_min, dist_max,[])
+        self.assertEquals(len(path), 1)
+
+    #        1
+    #    0      2:X,Y
+    def test_path_length_few(self):
+        cleared_graph = {0:{1:1}, 1:{2:1}, 2:{0:1}}
+        source_node = 0
+        closest_distances = {0: (2, 2), 1: (1, 1), 2:(0,0)}
+        dist_min = 2
+        dist_max = 2
+        path = graph_algorithms.random_walk(cleared_graph, source_node, closest_distances, dist_min, dist_max,[])
+        self.assertEquals(len(path), 3)
 
 if __name__ == "__main__":
     unittest.main()
