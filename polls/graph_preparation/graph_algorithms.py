@@ -1,6 +1,3 @@
-# Dijkstra's algorithm for shortest paths
-# David Eppstein, UC Irvine, 4 April 2002
-
 from __future__ import generators
 
 import random
@@ -29,15 +26,18 @@ def random_walk_wrapper(un_cleared_graph, source_node, elevs, route_specs, numbe
     closest_distances = route_processing.compute_closest_distance_values_at_each_node(cleared_graph, elevs, route_specs)
     ranges = get_ranges(route_specs.dist_min, route_specs.dist_max, number_of_ranges)
     routes = defaultdict(set)
+    distances = defaultdict(int)
     for r in ranges:
         for count in range(paths_per_range):#iterate paths_per_range times
-            path = random_walk(cleared_graph, source_node, closest_distances, r[0], r[1])
+            (path,running_distance) = random_walk(cleared_graph, source_node, closest_distances, r[0], r[1])
             if path is not None:
                 if coords is None:
                     routes[r].add(tuple(path))
+                    distances[tuple(path)] = running_distance
                 else:
                     routes[r].add(tuple([coords[node] for node in path]))
-    return (ranges, routes)
+                    distances[tuple([coords[node] for node in path])] = running_distance
+    return (ranges, routes, distances)
 
 def get_ranges(min_dist, max_dist, number_of_ranges=2):
     line_points = numpy.linspace(min_dist, max_dist, number_of_ranges)
@@ -100,9 +100,9 @@ def random_walk(cleared_graph, source_node, closest_distances, dist_min, dist_ma
             break
 
     if dist_min <= running_distance <= dist_max:
-       return path
+        return (path,running_distance)
     else:
-        return None
+        return (None,None)
 
 """ Filter based on false see above method description
     a. We will filter from the candidate set of next
@@ -129,6 +129,8 @@ def is_viable(node, running_distance, dist_max, path, cleared_graph, seen_X, see
         return False
     return True
 
+# Dijkstra's algorithm for shortest paths
+# David Eppstein, UC Irvine, 4 April 2002
 def Dijkstra(G, start, end=None):
 	"""
 	Find shortest paths from the start vertex to all

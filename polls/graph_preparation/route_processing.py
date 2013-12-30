@@ -47,16 +47,24 @@ def check_inherent_specs(route_specs):
    the user will be told what the upper limit elevation
    is or what the lower limit elevation is.
    """
-def check_node_exists_in_elev_ranges(route_specs):
+#def check_node_exists_in_elev_ranges(route_specs):
+#    elevs = [n.elevation for n in Node.objects.all()]
+#    elev_message = "\nLowest/Highest elevation in graph: " + "{0:.2f}".format(min(elevs)) +"/"+ "{0:.2f}".format(max(elevs))
+#    if len(Node.objects.filter(elevation__gte=route_specs.elev_min_a).filter(elevation__lte=route_specs.elev_min_b))==0:
+#        raise Exception("No node exists with elevation in range: "+
+#                        str(route_specs.elev_min_a)+" - "+str(route_specs.elev_min_b) + elev_message)
+#    if len(Node.objects.filter(elevation__gte=route_specs.elev_max_a).filter(elevation__lte=route_specs.elev_max_b))==0:
+#        raise Exception("No node exists with elevation in range: "+
+#                        str(route_specs.elev_max_a)+" - "+str(route_specs.elev_max_b) + elev_message)
+
+def check_node_exists_in_elev_ranges(min, max):
     elevs = [n.elevation for n in Node.objects.all()]
     elev_message = "\nLowest/Highest elevation in graph: " + "{0:.2f}".format(min(elevs)) +"/"+ "{0:.2f}".format(max(elevs))
-    if len(Node.objects.filter(elevation__gte=route_specs.elev_min_a).filter(elevation__lte=route_specs.elev_min_b))==0:
-        raise Exception("No node exists with elevation in range: "+
-                        str(route_specs.elev_min_a)+" - "+str(route_specs.elev_min_b) + elev_message)
-    if len(Node.objects.filter(elevation__gte=route_specs.elev_max_a).filter(elevation__lte=route_specs.elev_max_b))==0:
-        raise Exception("No node exists with elevation in range: "+
-                        str(route_specs.elev_max_a)+" - "+str(route_specs.elev_max_b) + elev_message)
+    if len(Node.objects.filter(elevation__gte=min).filter(elevation__lte=max))==0:
+        return False
 
+#        raise Exception("No node exists with elevation in range: "+
+#                        str(min)+" - "+str(max) + elev_message)
 
 """The default value for source node is -1
    Here we check that that value is not as
@@ -65,13 +73,8 @@ def check_node_exists_in_elev_ranges(route_specs):
    """
 def check_source_node_set(route_specs):
     if route_specs.source_node == -1:
-        raise Exception("Please choose a starting coordinate from the drop down list")
+        return False
 
-
-""" Given path and coords, get coords for each node id in path
-    """
-def get_coords_version_of_path(path, coords):
-    return [coords[node_id] for node_id in path]
 
 """ Before we find for each node
     the shortest path distance to node in X
@@ -138,16 +141,21 @@ def compute_closest_distance_values_at_each_node(cleared_graph, elevs, route_spe
 
 def main_route_calculator(route_specs):
     response = {}
-    try:
-        check_inherent_specs(route_specs)
+    if not check_inherent_specs(route_specs):
+        response["warning"] = "Please choose a starting coordinate from the drop down list"
+        return response
         check_node_exists_in_elev_ranges(route_specs)
         check_source_node_set(route_specs)
         check_nodes_in_ranges_reachable_within_distance(route_specs)
-    except Exception, e:
+    #except Exception, e:
         response["input_status"] = "BadInput"
         response["response_data"] = e.message
         return response
     ensure_set_graph_from_db()
-    response["input_status"] = "???"
-    response["response_data"] = "Past checks"
+    (ranges, routes, distances) = graph_algorithms.random_walk_wrapper(adj_list, route_specs.source_node, elevs, route_specs, number_of_ranges=3, paths_per_range=2, coords=None)
+    routes = dict(routes)
+    distances = dict(distances)
+    response["ranges"] = ranges
+    response["routes"] = routes
+    response["distances"] = distances
     return response

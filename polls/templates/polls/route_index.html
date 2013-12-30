@@ -11,6 +11,20 @@
   <link rel="stylesheet" href="/resources/demos/style.css">
   <script>
 
+    var options = ['Option 1','Option 2','Option 3']
+
+var makeUL = function(list){
+    var a = '<ul>'
+        b = '</ul>'
+        m = [];
+
+    for (i = 0; i < list.length; i += 1){
+        m[i] = '<li>' + list[i] + '</li>';
+    }
+
+    document.getElementById("route_solution").innerHTML = a + m + b;
+}
+
   var computePathsFresh = function(){
         $.getJSON("http://127.0.0.1:8000/polls/route_solutions/",
         {
@@ -24,7 +38,11 @@
            csrfmiddlewaretoken:'{{ csrf_token }}'
         },
         function(data,status){
-          alert(data.input_status + "\n" + data.response_data);
+            if (typeof(data.input_status) !== 'undefined'){
+              alert(data.input_status + "\n" + data.response_data);
+            } else {
+              alert("no exception");
+            }
         })
         .fail(function(xhr) {
             console.log("Error: " + xhr.statusText);
@@ -46,6 +64,7 @@
       change: function( event, ui ) {
         updateSliderVals("#amount-range-dist", ui.values[0], ui.values[1]);
         computePathsFresh();
+        makeUL(options);
       }
     });
     updateSliderVals("#amount-range-dist" , $("#slider-range-dist").slider("values", 0),
@@ -83,9 +102,12 @@
     updateSliderVals("#amount-range-elev-max" , $("#slider-range-elev-max").slider("values", 0),
                                                 $("#slider-range-elev-max").slider("values", 1)  );
   });
+
+
   </script>
 </head>
 <body>
+
 
 <select id="start_list" onchange="computePathsFresh()">
    <option value="-1" >Choose your starting coordinates</option>
@@ -116,6 +138,8 @@
 </p>
 
 <div id="slider-range-elev-max"></div>
+
+<div id="route_solution"></div>
 
 </body>
 </html>
