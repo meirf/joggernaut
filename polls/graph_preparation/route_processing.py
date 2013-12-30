@@ -158,7 +158,7 @@ def main_route_calculator(route_specs):
         return response
     ####################
     """
-    (ranges, routes, distances) = graph_algorithms.random_walk_wrapper(adj_list, route_specs.source_node, elevs, route_specs, number_of_ranges=3, paths_per_range=1, coords=coords)
+    (ranges, routes, distances) = graph_algorithms.random_walk_wrapper(adj_list, route_specs.source_node, elevs, route_specs, number_of_ranges=3, paths_per_range=2, coords=coords)
     routes = dict(routes)
     distances = dict(distances)
     response["ranges"] = ranges

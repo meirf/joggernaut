@@ -29,21 +29,24 @@ def random_walk_wrapper(un_cleared_graph, source_node, elevs, route_specs, numbe
     distances = defaultdict(int)
     for r in ranges:
         for count in range(paths_per_range):#iterate paths_per_range times
-            (path,running_distance) = random_walk(cleared_graph, source_node, closest_distances, r[0], r[1])
-            if path is not None and path not in routes[str(int(r[0]))]:
+            (path,running_distance) = random_walk(cleared_graph, source_node, closest_distances, r['min'], r['max'])
+            routes_range_id = str(int(r['min']))
+            if path is not None and path not in routes[routes_range_id]:
                 if coords is None:
-                    routes[str(int(r[0]))].append(path)
-                    distances[tuple(path)] = running_distance
+                    routes[routes_range_id].append(path)
+                    distance_id = routes_range_id+"*"+str(len(routes[routes_range_id])-1)
+                    distances[distance_id] = running_distance
                 else:
-                    routes[str(int(r[0]))].append([coords[node] for node in path])
-                    distances[tuple([coords[node] for node in path])] = running_distance
+                    routes[routes_range_id].append([coords[node] for node in path])
+                    distance_id = routes_range_id+"*"+str(len(routes[routes_range_id])-1)
+                    distances[distance_id] = running_distance
     return (ranges, routes, distances)
 
 def get_ranges(min_dist, max_dist, number_of_ranges=2):
     line_points = numpy.linspace(min_dist, max_dist, number_of_ranges)
     ranges = []
     for i in range(0, len(line_points)-1):
-         ranges.append((line_points[i],line_points[i+1]))
+         ranges.append({"min":line_points[i], "max":line_points[i+1]})
     return ranges
 
 """ Accumulate path of nodes, P, s.t.
