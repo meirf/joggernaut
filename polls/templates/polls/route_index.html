@@ -72,8 +72,8 @@
         },
         function(data,status){
             if(data.warning === "okay"){
-              alert(data.warning + "\n\n" + data.route_data);
-              makeUL(options);
+              alert(data.warning);
+              document.getElementById('whereToPrint').innerHTML = JSON.stringify(data.route_data, null, 4);
             } else {
               alert(data.warning);
             }
@@ -173,6 +173,8 @@
 <div id="slider-range-elev-max"></div>
 
 <div id="route_solution"></div>
+
+<pre id=whereToPrint></pre>
 
 </body>
 </html>
