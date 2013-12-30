@@ -25,28 +25,25 @@ def random_walk_wrapper(un_cleared_graph, source_node, elevs, route_specs, numbe
     cleared_graph = route_processing.clear_graph_of_nodes_out_of_elev_range(un_cleared_graph, elevs, route_specs.elev_min_a, route_specs.elev_max_b)
     closest_distances = route_processing.compute_closest_distance_values_at_each_node(cleared_graph, elevs, route_specs)
     ranges = get_ranges(route_specs.dist_min, route_specs.dist_max, number_of_ranges)
-    routes = defaultdict(list)
-    distances = defaultdict(int)
     for r in ranges:
         for count in range(paths_per_range):#iterate paths_per_range times
             (path,running_distance) = random_walk(cleared_graph, source_node, closest_distances, r['min'], r['max'])
-            routes_range_id = str(int(r['min']))
-            if path is not None and path not in routes[routes_range_id]:
+            if path is not None and path not in r['paths']:
                 if coords is None:
-                    routes[routes_range_id].append(path)
-                    distance_id = routes_range_id+"*"+str(len(routes[routes_range_id])-1)
-                    distances[distance_id] = running_distance
+                    r['paths'].append(path)
+                    r['distances'].append(running_distance)
                 else:
-                    routes[routes_range_id].append([coords[node] for node in path])
-                    distance_id = routes_range_id+"*"+str(len(routes[routes_range_id])-1)
-                    distances[distance_id] = running_distance
-    return (ranges, routes, distances)
+                    path_in_coords = [{'lat':coords[node][0], 'long':coords[node][1]} for node in path]
+                    r['paths'].append(path_in_coords)
+                    r['distances'].append(running_distance)
+
+    return ranges
 
 def get_ranges(min_dist, max_dist, number_of_ranges=2):
     line_points = numpy.linspace(min_dist, max_dist, number_of_ranges)
     ranges = []
     for i in range(0, len(line_points)-1):
-         ranges.append({"min":line_points[i], "max":line_points[i+1]})
+         ranges.append({'min':line_points[i], 'max':line_points[i+1], 'paths':[], 'distances':[] })
     return ranges
 
 """ Accumulate path of nodes, P, s.t.

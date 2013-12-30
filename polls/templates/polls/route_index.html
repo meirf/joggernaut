@@ -11,23 +11,54 @@
   <link rel="stylesheet" href="/resources/demos/style.css">
   <script>
 
+
+    var route_data = [  { 'max': 1600.0,
+                          'min': 1200.0,
+                          'paths': [ [{'lat': 40.81, 'long': -73.95}, {'lat': 40.80, 'long': -73.95}],
+                                     [{'lat': 10.81, 'long': -13.95}, {'lat': 10.80, 'long': -13.95}]
+                                    ],
+                          'distances': [12.5, 13.8]
+                        },
+                        { 'max': 2000.0,
+                          'min': 1600.0,
+                          'paths': [ [{'lat': 1.81, 'long': -2.95}, {'lat': 3.80, 'long': -4.95}],
+                                     [{'lat': 5.81, 'long': -6.95}, {'lat': 7.80, 'long': -8.95}]
+                                    ],
+                          'distances': [30, 50.5]
+                        }
+                      ]
+
+
+
+    //data structures:
+    //   ranges: [ {'max': 1600.0, 'min': 1200.0}, {'max': 2000.0, 'min': 1600.0} ]
+    //   routes: { '1200.0': [ [{'lat': 40.81, 'long': -73.95}, {'lat': 40.80, 'long': -73.95}] , [{'lat': 40.81, 'long': -73.95}, {'lat': 40.80, 'long': -73.95}] ],
+    //             '1600.0': [ [{'lat': 40.81, 'long': -73.95}, {'lat': 40.80, 'long': -73.94}],  [{'lat': 40.81, 'long': -73.95}, {'lat': 40.80, 'long': -73.95}] ]
+    //           }
+    //distances: {'1600.0*0': 1998.1162401389067, '1200.0*0': 1576.8605361311124}
+
+
+    var ranges = [ {'max': 1600.0, 'min': 1200.0}, {'max': 2000.0, 'min': 1600.0} ]
+
+    var routes = { '1200.0': [ [{'lat': 40.81, 'long': -73.95}, {'lat': 40.80, 'long': -73.95}] , [{'lat': 40.81, 'long': -73.95}, {'lat': 40.80, 'long': -73.95}] ],
+                   '1600.0': [ [{'lat': 40.81, 'long': -73.95}, {'lat': 40.80, 'long': -73.94}],  [{'lat': 40.81, 'long': -73.95}, {'lat': 40.80, 'long': -73.95}] ]
+                 }
+
     var options = ['Option 1','Option 2','Option 3']
 
-var makeUL = function(list){
-    var a = '<ul>'
-        b = '</ul>'
-        m = [];
+    var makeUL = function(list){
+        var a = '<ul>'
+            b = '</ul>'
+            m = [];
 
-    for (i = 0; i < list.length; i += 1){
-        m[i] = '<li>' + list[i] + '</li>';
+        for (i = 0; i < list.length; i += 1){
+            m[i] = '<li>' + list[i] + '</li>';
+        }
+
+        document.getElementById("route_solution").innerHTML = a + m + b;
     }
 
-    document.getElementById("route_solution").innerHTML = a + m + b;
-}
-
-
-
- var computePathsFresh = function(){
+     var computePathsFresh = function(){
         $.getJSON("http://127.0.0.1:8000/polls/route_solutions/",
         {
            source_node_id: document.getElementById("start_list").value,
@@ -40,7 +71,12 @@ var makeUL = function(list){
            csrfmiddlewaretoken:'{{ csrf_token }}'
         },
         function(data,status){
-              alert(data.warning + "\n\n" + data.ranges + "\n\n" + data.routes+ "\n\n" + data.distances);
+            if(data.warning === "okay"){
+              alert(data.warning + "\n\n" + data.route_data);
+              makeUL(options);
+            } else {
+              alert(data.warning);
+            }
        })
         .fail(function(xhr) {
             console.log("Error: " + xhr.statusText);
@@ -62,7 +98,6 @@ var makeUL = function(list){
       change: function( event, ui ) {
         updateSliderVals("#amount-range-dist", ui.values[0], ui.values[1]);
         computePathsFresh();
-        makeUL(options);
       }
     });
     updateSliderVals("#amount-range-dist" , $("#slider-range-dist").slider("values", 0),

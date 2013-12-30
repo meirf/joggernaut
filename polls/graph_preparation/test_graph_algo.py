@@ -428,28 +428,14 @@ class TestRanges(unittest.TestCase):
         min_dist = 1
         max_dist = 10
         ranges = graph_algorithms.get_ranges(min_dist, max_dist)
-        self.assertEquals(ranges, [{"min":1, "max":10}])
+        self.assertEquals(ranges, [{"min":1, "max":10,'paths':[], 'distances':[]}])
         min_dist = 2
         max_dist = 10
         ranges = graph_algorithms.get_ranges(min_dist, max_dist, 5)
-        self.assertEquals(ranges, [{"min":2, "max":4},{"min":4, "max":6},{"min":6, "max":8},{"min":8, "max":10}])
+        self.assertEquals(ranges, [{"min":2, "max":4, 'paths':[], 'distances':[]},{"min":4, "max":6, 'paths':[], 'distances':[]},{"min":6, "max":8, 'paths':[], 'distances':[]},{"min":8, "max":10, 'paths':[], 'distances':[]}])
 
 class TestRandomWalkWithRangesMultiplicity(unittest.TestCase):
 
-    def test_using_defaul_param_vals(self):
-        source_node = 0
-        dist_min = 3
-        dist_max = 3
-        elev_min_a = 20
-        elev_min_b = 30
-        elev_max_a = 50
-        elev_max_b = 60
-        un_cleared_graph = {0:{1:1}, 1:{2:1}, 2:{3:1}, 3:{0:1}}
-        elevs = [40, 40, 25, 55]
-        route_specs = route_specification_data.RouteSpecs(source_node, dist_min, dist_max, elev_min_a,elev_min_b, elev_max_a, elev_max_b)
-        (ranges, routes, distances) = graph_algorithms.random_walk_wrapper(un_cleared_graph, source_node, elevs, route_specs)
-        self.assertEquals(ranges, [{"min":3, "max":3}])
-        self.assertEquals(routes, {'3':[[0,1,2,3]]})
 
     def test_using_multiplepaths(self):
         source_node = 0
@@ -462,9 +448,16 @@ class TestRandomWalkWithRangesMultiplicity(unittest.TestCase):
         un_cleared_graph = {0:{1:1}, 1:{2:1}, 2:{3:1}, 3:{0:1}}
         elevs = [40, 40, 25, 55]
         route_specs = route_specification_data.RouteSpecs(source_node, dist_min, dist_max, elev_min_a,elev_min_b, elev_max_a, elev_max_b)
-        (ranges, routes, distances) = graph_algorithms.random_walk_wrapper(un_cleared_graph, source_node, elevs, route_specs, 2, 2)
-        self.assertEquals(ranges, [{"min":3, "max":3}])
-        self.assertEquals(routes, {'3':[[0,1,2,3]]})
+        route_data = graph_algorithms.random_walk_wrapper(un_cleared_graph, source_node, elevs, route_specs, 2, 2)
+        expected = [  {   'min': 3,
+                          'max': 3,
+                          'paths': [
+                                     [0, 1, 2, 3]
+                                    ],
+                          'distances': [3]
+                        }
+                      ]
+        self.assertEquals(route_data, expected)
         source_node = 0
         dist_min = 2
         dist_max = 4
@@ -475,11 +468,23 @@ class TestRandomWalkWithRangesMultiplicity(unittest.TestCase):
         un_cleared_graph = {0:{1:1}, 1:{2:1}, 2:{3:1}, 3:{0:1}}
         elevs = [40, 40, 25, 55]
         route_specs = route_specification_data.RouteSpecs(source_node, dist_min, dist_max, elev_min_a,elev_min_b, elev_max_a, elev_max_b)
-        (ranges, routes, distances) = graph_algorithms.random_walk_wrapper(un_cleared_graph, source_node, elevs, route_specs, 3, 1)
-        self.assertEquals(ranges, [{"min":2, "max":3}, {"min":3, "max":4}])
-        self.assertEquals(routes, {'2':[[0,1,2,3]],
-                                   '3':[[0,1,2,3,0]]
-                                  })
+        route_data = graph_algorithms.random_walk_wrapper(un_cleared_graph, source_node, elevs, route_specs, 3, 1)
+        expected = [  {   'min': 2,
+                          'max': 3,
+                          'paths': [
+                                     [0, 1, 2, 3]
+                                    ],
+                          'distances': [3]
+                      },
+                      {   'min': 3,
+                          'max': 4,
+                          'paths': [
+                                     [0, 1, 2, 3, 0]
+                                    ],
+                          'distances': [4]
+                      }
+                   ]
+        self.assertEquals(route_data, expected)
 
     def test_getting_coords_not_node_ids(self):
         coords = [(1,2),(3,4),(5,6),(7,8)]
@@ -493,13 +498,23 @@ class TestRandomWalkWithRangesMultiplicity(unittest.TestCase):
         un_cleared_graph = {0:{1:1}, 1:{2:1}, 2:{3:1}, 3:{0:1}}
         elevs = [40, 40, 25, 55]
         route_specs = route_specification_data.RouteSpecs(source_node, dist_min, dist_max, elev_min_a,elev_min_b, elev_max_a, elev_max_b)
-        (ranges, routes, distances) = graph_algorithms.random_walk_wrapper(un_cleared_graph, source_node, elevs, route_specs, 3, 1, coords)
-        self.assertEquals(ranges, [{"min":2, "max":3}, {"min":3, "max":4}])
-        self.assertEquals(routes, { '2':[[(1,2),(3,4),(5,6),(7,8)]],
-                                    '3':[[(1,2),(3,4),(5,6),(7,8),(1,2)]]
-                                  }
-                         )
-
+        route_data = graph_algorithms.random_walk_wrapper(un_cleared_graph, source_node, elevs, route_specs, 3, 1, coords)
+        expected = [  {   'min': 2,
+                          'max': 3,
+                          'paths': [
+                                     [{'lat': 1, 'long': 2}, {'lat': 3, 'long': 4}, {'lat': 5, 'long': 6},{'lat': 7, 'long': 8}]
+                                    ],
+                          'distances': [3]
+                        },
+                        { 'min': 3,
+                          'max': 4,
+                          'paths': [
+                                     [{'lat': 1, 'long': 2}, {'lat': 3, 'long': 4}, {'lat': 5, 'long': 6},{'lat': 7, 'long': 8}, {'lat': 1, 'long': 2}]
+                                    ],
+                          'distances': [4]
+                        }
+                      ]
+        self.assertEquals(route_data, expected)
 
 if __name__ == "__main__":
     unittest.main()

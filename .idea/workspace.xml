@@ -26,7 +26,7 @@
       <file leaf-file-name="route_index.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/polls/templates/polls/route_index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="42" column="55" selection-start="1677" selection-end="1677" vertical-scroll-proportion="0.76843315" vertical-offset="551" max-vertical-offset="4292">
+            <state line="74" column="61" selection-start="3566" selection-end="3566" vertical-scroll-proportion="0.54960984" vertical-offset="1653" max-vertical-offset="5307">
               <folding>
                 <element signature="n#style#0;n#input#0;n#p#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#input#0;n#p#1;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -39,7 +39,7 @@
       <file leaf-file-name="route_processing.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/polls/graph_preparation/route_processing.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="165" column="42" selection-start="7580" selection-end="7580" vertical-scroll-proportion="0.0" vertical-offset="3937" max-vertical-offset="4988">
+            <state line="160" column="1" selection-start="7380" selection-end="7380" vertical-scroll-proportion="0.0" vertical-offset="3908" max-vertical-offset="4843">
               <folding>
                 <element signature="e#28#63#0" expanded="true" />
               </folding>
@@ -50,7 +50,7 @@
       <file leaf-file-name="graph_algorithms.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/polls/graph_preparation/graph_algorithms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="46" column="15" selection-start="2406" selection-end="2406" vertical-scroll-proportion="0.0" vertical-offset="515" max-vertical-offset="8410">
+            <state line="45" column="96" selection-start="2251" selection-end="2277" vertical-scroll-proportion="0.0" vertical-offset="457" max-vertical-offset="8323">
               <folding />
             </state>
           </provider>
@@ -59,7 +59,7 @@
       <file leaf-file-name="test_graph_algo.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/polls/graph_preparation/test_graph_algo.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="430" column="53" selection-start="18257" selection-end="18257" vertical-scroll-proportion="0.0" vertical-offset="12296" max-vertical-offset="14790">
+            <state line="434" column="222" selection-start="18621" selection-end="18621" vertical-scroll-proportion="0.0" vertical-offset="12064" max-vertical-offset="15225">
               <folding>
                 <element signature="e#28#61#0" expanded="true" />
               </folding>
@@ -89,9 +89,9 @@
         <option value="$PROJECT_DIR$/mysite/settings.py" />
         <option value="$PROJECT_DIR$/polls/graph_preparation/db_graph_2_mem.py" />
         <option value="$PROJECT_DIR$/polls/views.py" />
-        <option value="$PROJECT_DIR$/polls/graph_preparation/route_processing.py" />
         <option value="$PROJECT_DIR$/polls/graph_preparation/graph_algorithms.py" />
         <option value="$PROJECT_DIR$/polls/graph_preparation/test_graph_algo.py" />
+        <option value="$PROJECT_DIR$/polls/graph_preparation/route_processing.py" />
         <option value="$PROJECT_DIR$/polls/templates/polls/route_index.html" />
       </list>
     </option>
@@ -646,32 +646,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/polls/views.py">
+    <entry file="file://$PROJECT_DIR$/polls/graph_preparation/graph_algorithms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="88" selection-start="1271" selection-end="1428" vertical-scroll-proportion="0.53475934" vertical-offset="254" max-vertical-offset="1972">
+        <state line="45" column="96" selection-start="2251" selection-end="2277" vertical-scroll-proportion="0.0" vertical-offset="457" max-vertical-offset="8323">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/polls/graph_preparation/test_graph_algo.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="430" column="53" selection-start="18257" selection-end="18257" vertical-scroll-proportion="0.0" vertical-offset="12296" max-vertical-offset="14790">
+        <state line="434" column="222" selection-start="18621" selection-end="18621" vertical-scroll-proportion="0.0" vertical-offset="12064" max-vertical-offset="15225">
           <folding>
             <element signature="e#28#61#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/polls/graph_preparation/graph_algorithms.py">
+    <entry file="file://$PROJECT_DIR$/polls/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="15" selection-start="2406" selection-end="2406" vertical-scroll-proportion="0.0" vertical-offset="515" max-vertical-offset="8410">
+        <state line="32" column="88" selection-start="1271" selection-end="1428" vertical-scroll-proportion="-0.3026738" vertical-offset="1037" max-vertical-offset="1972">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/polls/graph_preparation/route_processing.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="165" column="42" selection-start="7580" selection-end="7580" vertical-scroll-proportion="0.0" vertical-offset="3937" max-vertical-offset="4988">
+        <state line="160" column="1" selection-start="7380" selection-end="7380" vertical-scroll-proportion="0.0" vertical-offset="3908" max-vertical-offset="4843">
           <folding>
             <element signature="e#28#63#0" expanded="true" />
           </folding>
@@ -680,7 +680,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/polls/templates/polls/route_index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="55" selection-start="1677" selection-end="1677" vertical-scroll-proportion="0.76843315" vertical-offset="551" max-vertical-offset="4292">
+        <state line="74" column="61" selection-start="3566" selection-end="3566" vertical-scroll-proportion="0.54960984" vertical-offset="1653" max-vertical-offset="5307">
           <folding>
             <element signature="n#style#0;n#input#0;n#p#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#input#0;n#p#1;n#body#0;n#html#0;n#!!top" expanded="true" />

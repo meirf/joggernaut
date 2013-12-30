@@ -133,7 +133,7 @@ def main_route_calculator(route_specs):
     elevs = db_graph_2_mem.get_elevs()
     adj_list = db_graph_2_mem.get_adjacency_list()
     coords = db_graph_2_mem.get_coords()
-    """
+
     if check_inherent_specs(route_specs) is False:
         response["warning"] = "Fix elevation ranges: " +str(route_specs.elev_min_b) + " is greater than " + str(route_specs.elev_max_b)
         return response
@@ -157,11 +157,6 @@ def main_route_calculator(route_specs):
         response["warning"] = "Elevation ranges can't be reached. Min elevation/Max elevation within distance " + str(route_specs.dist_max) +" is " + "{0:.2f}".format(min(elevs_within_D1)) +"/"+ "{0:.2f}".format(max(elevs_within_D1))
         return response
     ####################
-    """
-    (ranges, routes, distances) = graph_algorithms.random_walk_wrapper(adj_list, route_specs.source_node, elevs, route_specs, number_of_ranges=3, paths_per_range=2, coords=coords)
-    routes = dict(routes)
-    distances = dict(distances)
-    response["ranges"] = ranges
-    response["routes"] = str(routes)
-    response["distances"] = str(distances)
+    route_data = graph_algorithms.random_walk_wrapper(adj_list, route_specs.source_node, elevs, route_specs, number_of_ranges=3, paths_per_range=1, coords=coords)
+    response['route_data'] = route_data
     return response
