@@ -25,17 +25,17 @@ def random_walk_wrapper(un_cleared_graph, source_node, elevs, route_specs, numbe
     cleared_graph = route_processing.clear_graph_of_nodes_out_of_elev_range(un_cleared_graph, elevs, route_specs.elev_min_a, route_specs.elev_max_b)
     closest_distances = route_processing.compute_closest_distance_values_at_each_node(cleared_graph, elevs, route_specs)
     ranges = get_ranges(route_specs.dist_min, route_specs.dist_max, number_of_ranges)
-    routes = defaultdict(set)
+    routes = defaultdict(list)
     distances = defaultdict(int)
     for r in ranges:
         for count in range(paths_per_range):#iterate paths_per_range times
             (path,running_distance) = random_walk(cleared_graph, source_node, closest_distances, r[0], r[1])
-            if path is not None:
+            if path is not None and path not in routes[str(int(r[0]))]:
                 if coords is None:
-                    routes[r].add(tuple(path))
+                    routes[str(int(r[0]))].append(path)
                     distances[tuple(path)] = running_distance
                 else:
-                    routes[r].add(tuple([coords[node] for node in path]))
+                    routes[str(int(r[0]))].append([coords[node] for node in path])
                     distances[tuple([coords[node] for node in path])] = running_distance
     return (ranges, routes, distances)
 
