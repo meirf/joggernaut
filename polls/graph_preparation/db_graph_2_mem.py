@@ -9,7 +9,6 @@ def get_elevs():
         elevs[node.node_id] = node.elevation
     return elevs
 
-
 """Not identical to original adjacency list
    use in graph_input_2_db.py, which was
         dictionary mapping each node id to a list,
@@ -28,6 +27,8 @@ def get_adjacency_list():
         adj_list[edge.node_a.node_id][edge.node_b.node_id] = edge.distance
     return adj_list
 
-if __name__ == "__main__":
-    print get_elevs()
-    print get_adjacency_list()
+def get_coords():
+    elevs = [None] * (len(Node.objects.all()) + 1)
+    for node in Node.objects.all():
+        elevs[node.node_id] = (node.latit, node.longit)
+    return elevs

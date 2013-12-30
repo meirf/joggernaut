@@ -30,8 +30,7 @@ def route_solutions(request):
         g = request.GET['elev_max_b']
         input_specs = route_specification_data.RouteSpecs(int(a), int(b), int(c), int(d), int(e), int(f), int(g))
         route_response = route_processing.main_route_calculator(input_specs)
-        return HttpResponse(json.dumps(route_response))
-
+        return HttpResponse(json.dumps(route_response), content_type="application/json")
     return HttpResponse("You're looking at route_solutions non ajax-ly")
 
 def index(request):

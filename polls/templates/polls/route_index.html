@@ -25,7 +25,9 @@ var makeUL = function(list){
     document.getElementById("route_solution").innerHTML = a + m + b;
 }
 
-  var computePathsFresh = function(){
+
+
+ var computePathsFresh = function(){
         $.getJSON("http://127.0.0.1:8000/polls/route_solutions/",
         {
            source_node_id: document.getElementById("start_list").value,
@@ -38,12 +40,8 @@ var makeUL = function(list){
            csrfmiddlewaretoken:'{{ csrf_token }}'
         },
         function(data,status){
-            if (typeof(data.input_status) !== 'undefined'){
-              alert(data.input_status + "\n" + data.response_data);
-            } else {
-              alert("no exception");
-            }
-        })
+              alert(data.warning + "\n\n" + data.ranges + "\n\n" + data.routes+ "\n\n" + data.distances);
+       })
         .fail(function(xhr) {
             console.log("Error: " + xhr.statusText);
             alert("Error: " + xhr.statusText);
@@ -104,10 +102,10 @@ var makeUL = function(list){
   });
 
 
+
   </script>
 </head>
 <body>
-
 
 <select id="start_list" onchange="computePathsFresh()">
    <option value="-1" >Choose your starting coordinates</option>

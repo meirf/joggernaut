@@ -4,6 +4,7 @@ from django.utils import unittest
 import route_processing
 import route_specification_data
 import graph_algorithms
+import db_graph_2_mem
 
 def get_test_adj_list():
     return  {0: {1: 82.38873277805163, 14: 266.6231251167132},
@@ -510,6 +511,7 @@ class TestMainRouteCalculator(unittest.TestCase):
         route_specs = route_specification_data.RouteSpecs(source_node, dist_min, dist_max, elev_min_a,elev_min_b, elev_max_a, elev_max_b)
         response = route_processing.main_route_calculator(route_specs)
         self.assertNotEquals(response, {})
+
 
 if __name__ == "__main__":
     unittest.main()
