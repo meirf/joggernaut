@@ -11,23 +11,6 @@
   <link rel="stylesheet" href="/resources/demos/style.css">
   <script>
 
-
-    var data = [  { 'max': 1600.0,
-                          'min': 1200.0,
-                          'paths': [ [{'lat': 40.81, 'long': -73.95}, {'lat': 40.80, 'long': -73.95}],
-                                     [{'lat': 10.81, 'long': -13.95}, {'lat': 10.80, 'long': -13.95}]
-                                    ],
-                          'distances': [12.5, 13.8]
-                        },
-                        { 'max': 2000.0,
-                          'min': 1600.0,
-                          'paths': [ [{'lat': 1.81, 'long': -2.95}, {'lat': 3.80, 'long': -4.95}],
-                                     [{'lat': 5.81, 'long': -6.95}, {'lat': 7.80, 'long': -8.95}]
-                                    ],
-                          'distances': [30, 50.5]
-                        }
-                      ]
-
     var displayImagePath = function(selected_path){
        var pipedCoords = selected_path[0].lat+","+selected_path[0].long;
        for (i = 1; i < selected_path.length; i += 1){
@@ -47,7 +30,9 @@
         document.getElementById('path_distance').innerHTML = "Distance of path: "+distance+" meters";
     }
 
-    var displayRandomRouteJSON = function(route_data){
+    var route_data = []
+
+    var displayRandomRouteJSON = function(){
         var random_range_index = getRandomInt(0, route_data.length-1);
         var chosen_range = route_data[random_range_index];
         var random_path_index = getRandomInt(0, chosen_range.paths.length-1);
@@ -76,7 +61,8 @@
         },
         function(data,status){
             if(data.warning === "okay"){
-              displayRandomRouteJSON(data.route_data);
+              route_data = data.route_data;
+              displayRandomRouteJSON();
               //document.getElementById("route_image").src="http://maps.googleapis.com/maps/api/staticmap?size=400x400&sensor=false&path=40.8108534898,-73.9506912231|40.8102038588,-73.9511632919|40.8095379805,-73.9516782761|40.8083523754,-73.9488136768|40.8090182656,-73.9483845234|40.8096841492,-73.9479231834|40.8108534898,-73.9506912231|40.8102038588,-73.9511632919|40.8095379805,-73.9516782761|40.808880216,-73.952139616|40.8082630483,-73.952600956";
               //document.getElementById('whereToPrint').innerHTML = JSON.stringify(data.route_data, null, 4);
             } else {
@@ -180,6 +166,8 @@
 <pre id=path_distance></pre>
 
 <img id="route_image" src="http://maps.googleapis.com/maps/api/staticmap?center=40.81085348983534,-73.95069122314453&zoom=14&size=400x400&maptype=roadmap&sensor=false">
+
+<p><button type="button" onclick="displayRandomRouteJSON()">Get Alternate Route</button></p>
 
 <pre id=whereToPrint></pre>
 
