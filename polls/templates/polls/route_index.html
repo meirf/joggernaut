@@ -28,7 +28,24 @@
                         }
                       ]
 
+    var displayImagePath = function(selected_path){
+       var pipedCoords = selected_path[0].lat+","+selected_path[0].long;
+       for (i = 1; i < selected_path.length; i += 1){
+            pipedCoords += "|"+selected_path[i].lat+","+selected_path[i].long;;
+       }
+       var letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+       var markers = ""
+       for (i = 0; i < selected_path.length; i += 1){
+            if(i<26){
+                markers += "&markers=label:"+letters[i]+"|"+selected_path[i].lat+","+selected_path[i].long;
+            }
+       }
+       document.getElementById("route_image").src="http://maps.googleapis.com/maps/api/staticmap?size=400x400&sensor=false&path="+pipedCoords+markers;
+    }
 
+    var displayPathDistance = function(distance){
+        document.getElementById('path_distance').innerHTML = "Distance of path: "+distance+" meters";
+    }
 
     var displayRandomRouteJSON = function(route_data){
         var random_range_index = getRandomInt(0, route_data.length-1);
@@ -36,7 +53,9 @@
         var random_path_index = getRandomInt(0, chosen_range.paths.length-1);
         var selected_path = chosen_range.paths[random_path_index];
         var selected_path_distance = chosen_range.distances[random_path_index];
-        document.getElementById('current_route').innerHTML = random_range_index+","+random_path_index+","+selected_path_distance + JSON.stringify(selected_path, null, 4);
+        displayImagePath(selected_path);
+        displayPathDistance(selected_path_distance);
+        document.getElementById('current_route').innerHTML = JSON.stringify(selected_path, null, 4);
     }
 
     function getRandomInt (min, max) {
@@ -58,8 +77,8 @@
         function(data,status){
             if(data.warning === "okay"){
               displayRandomRouteJSON(data.route_data);
-              document.getElementById("route_image").src="http://maps.googleapis.com/maps/api/staticmap?size=400x400&sensor=false&path=40.8108534898,-73.9506912231|40.8102038588,-73.9511632919|40.8095379805,-73.9516782761|40.8083523754,-73.9488136768|40.8090182656,-73.9483845234|40.8096841492,-73.9479231834|40.8108534898,-73.9506912231|40.8102038588,-73.9511632919|40.8095379805,-73.9516782761|40.808880216,-73.952139616|40.8082630483,-73.952600956";
-              document.getElementById('whereToPrint').innerHTML = JSON.stringify(data.route_data, null, 4);
+              //document.getElementById("route_image").src="http://maps.googleapis.com/maps/api/staticmap?size=400x400&sensor=false&path=40.8108534898,-73.9506912231|40.8102038588,-73.9511632919|40.8095379805,-73.9516782761|40.8083523754,-73.9488136768|40.8090182656,-73.9483845234|40.8096841492,-73.9479231834|40.8108534898,-73.9506912231|40.8102038588,-73.9511632919|40.8095379805,-73.9516782761|40.808880216,-73.952139616|40.8082630483,-73.952600956";
+              //document.getElementById('whereToPrint').innerHTML = JSON.stringify(data.route_data, null, 4);
             } else {
               alert(data.warning);
             }
@@ -128,8 +147,6 @@
 </head>
 <body>
 
-<pre id=current_route></pre>
-
 <select id="start_list" onchange="computePathsFresh()">
    <option value="-1" >Choose your starting coordinates</option>
    {% for n in nodes %}
@@ -160,9 +177,13 @@
 
 <div id="slider-range-elev-max"></div>
 
+<pre id=path_distance></pre>
+
 <img id="route_image" src="http://maps.googleapis.com/maps/api/staticmap?center=40.81085348983534,-73.95069122314453&zoom=14&size=400x400&maptype=roadmap&sensor=false">
 
 <pre id=whereToPrint></pre>
+
+<pre id=current_route></pre>
 
 </body>
 </html>
