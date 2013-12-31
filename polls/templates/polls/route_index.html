@@ -51,9 +51,20 @@
     }
 
     function updateRouteData(new_min, new_max) {
+        var j = route_data.length;
+        while (j--) {
+            var k = route_data[j].paths.length;
+            while(k--){
+                if(route_data[j].distances[k]>new_max || route_data[j].distances[k]<new_min){
+                    route_data[j].paths.splice(k, 1);
+                    route_data[j].distances.splice(k, 1);
+                }
+            }
+        }
+
         var i = route_data.length;
         while (i--) {
-            if (route_data[i].max > new_max || route_data[i].min < new_min) {
+            if (route_data[i].paths.length === 0) {
                 route_data.splice(i, 1);
             }
         }
