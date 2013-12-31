@@ -36,7 +36,7 @@ def random_walk_wrapper(un_cleared_graph, source_node, elevs, route_specs, numbe
                     path_in_coords = [{'lat':coords[node][0], 'long':coords[node][1]} for node in path]
                     r['paths'].append(path_in_coords)
                     r['distances'].append(running_distance)
-
+    ranges = [r for r in ranges if len(r['paths'])>0 and len(r['distances'])>0]
     return ranges
 
 def get_ranges(min_dist, max_dist, number_of_ranges=2):

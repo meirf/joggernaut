@@ -436,7 +436,6 @@ class TestRanges(unittest.TestCase):
 
 class TestRandomWalkWithRangesMultiplicity(unittest.TestCase):
 
-
     def test_using_multiplepaths(self):
         source_node = 0
         dist_min = 3

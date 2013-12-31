@@ -23,7 +23,9 @@
                 markers += "&markers=label:"+letters[i]+"|"+selected_path[i].lat+","+selected_path[i].long;
             }
        }
-       document.getElementById("route_image").src="http://maps.googleapis.com/maps/api/staticmap?size=400x400&sensor=false&path="+pipedCoords+markers;
+
+       api_key_add_on = "&key=" + "AIzaSyBLkeL8vhUY5qhueJvbpTf1x4v9l6tmNEY";
+       document.getElementById("route_image").src="http://maps.googleapis.com/maps/api/staticmap?size=400x400&sensor=false&path="+pipedCoords+markers+api_key_add_on;
     }
 
     var displayPathDistance = function(distance){
@@ -90,13 +92,11 @@
         function(data,status){
             if(data.warning === "okay"){
               route_data = data.route_data;
-              alert(route_data);
               if(route_data.length === 0){
                 alert("No results for this request. Please relax the constraints.");
               } else {
                 displayRandomRouteJSON();
               }
-              document.getElementById('whereToPrint').innerHTML = JSON.stringify(data.route_data, null, 4);
             } else {
               alert(data.warning);
             }
@@ -197,7 +197,7 @@
 
 <pre id=path_distance></pre>
 
-<img id="route_image" src="http://maps.googleapis.com/maps/api/staticmap?center=40.81085348983534,-73.95069122314453&zoom=14&size=400x400&maptype=roadmap&sensor=false">
+<img id="route_image" src="http://maps.googleapis.com/maps/api/staticmap?center=40.81085348983534,-73.95069122314453&zoom=14&size=400x400&maptype=roadmap&sensor=false&key=AIzaSyBLkeL8vhUY5qhueJvbpTf1x4v9l6tmNEY">
 
 <p><button type="button" onclick="displayRandomRouteJSON()">Get Alternate Route</button></p>
 
