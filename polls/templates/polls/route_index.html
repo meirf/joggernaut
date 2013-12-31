@@ -32,6 +32,7 @@
 
     var route_data = []
 
+
     var displayRandomRouteJSON = function(){
         var random_range_index = getRandomInt(0, route_data.length-1);
         var chosen_range = route_data[random_range_index];
@@ -47,7 +48,34 @@
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
+    function updateRouteData(new_min, new_max) {
+        var i = route_data.length;
+        while (i--) {
+            if (route_data[i].max > new_max || route_data[i].min < new_min) {
+                route_data.splice(i, 1);
+            }
+        }
+    }
+
+    var old_dist_min = 1200;
+    var old_dist_max = 2000;
+
+    function distanceUpdate(new_dist_min, new_dist_max){
+        if(new_dist_min >= old_dist_min && new_dist_max <= old_dist_max){
+            updateRouteData(new_dist_min, new_dist_max);
+            if(route_data.length === 0){
+                computePathsFresh();
+            }
+            displayRandomRouteJSON();
+        } else {
+            computePathsFresh();
+        }
+        old_dist_min = new_dist_min;
+        old_dist_max = new_dist_max;
+    }
+
      var computePathsFresh = function(){
+        alert("call to server");
         $.getJSON("http://127.0.0.1:8000/polls/route_solutions/",
         {
            source_node_id: document.getElementById("start_list").value,
@@ -62,9 +90,13 @@
         function(data,status){
             if(data.warning === "okay"){
               route_data = data.route_data;
-              displayRandomRouteJSON();
-              //document.getElementById("route_image").src="http://maps.googleapis.com/maps/api/staticmap?size=400x400&sensor=false&path=40.8108534898,-73.9506912231|40.8102038588,-73.9511632919|40.8095379805,-73.9516782761|40.8083523754,-73.9488136768|40.8090182656,-73.9483845234|40.8096841492,-73.9479231834|40.8108534898,-73.9506912231|40.8102038588,-73.9511632919|40.8095379805,-73.9516782761|40.808880216,-73.952139616|40.8082630483,-73.952600956";
-              //document.getElementById('whereToPrint').innerHTML = JSON.stringify(data.route_data, null, 4);
+              alert(route_data);
+              if(route_data.length === 0){
+                alert("No results for this request. Please relax the constraints.");
+              } else {
+                displayRandomRouteJSON();
+              }
+              document.getElementById('whereToPrint').innerHTML = JSON.stringify(data.route_data, null, 4);
             } else {
               alert(data.warning);
             }
@@ -87,8 +119,8 @@
       max: 3000,
       values: [ 1200, 2000 ],
       change: function( event, ui ) {
-        updateSliderVals("#amount-range-dist", ui.values[0], ui.values[1]);
-        computePathsFresh();
+        updateSliderVals("#amount-range-dist", ui.values[0], ui.values[1] );
+        distanceUpdate(ui.values[0], ui.values[1]);
       }
     });
     updateSliderVals("#amount-range-dist" , $("#slider-range-dist").slider("values", 0),

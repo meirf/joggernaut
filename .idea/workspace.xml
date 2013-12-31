@@ -26,7 +26,7 @@
       <file leaf-file-name="route_index.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/polls/templates/polls/route_index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="43" column="5" selection-start="2087" selection-end="2087" vertical-scroll-proportion="0.4343318" vertical-offset="870" max-vertical-offset="5278">
+            <state line="92" column="30" selection-start="3951" selection-end="3951" vertical-scroll-proportion="0.2983871" vertical-offset="2409" max-vertical-offset="6206">
               <folding />
             </state>
           </provider>
@@ -648,7 +648,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/polls/templates/polls/route_index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="5" selection-start="2087" selection-end="2087" vertical-scroll-proportion="0.4343318" vertical-offset="870" max-vertical-offset="5278">
+        <state line="92" column="30" selection-start="3951" selection-end="3951" vertical-scroll-proportion="0.2983871" vertical-offset="2409" max-vertical-offset="6206">
           <folding />
         </state>
       </provider>
