@@ -157,6 +157,6 @@ def main_route_calculator(route_specs):
         response["warning"] = "Elevation ranges can't be reached. Min elevation/Max elevation within distance " + str(route_specs.dist_max) +" is " + "{0:.2f}".format(min(elevs_within_D1)) +"/"+ "{0:.2f}".format(max(elevs_within_D1))
         return response
     ####################
-    route_data = graph_algorithms.random_walk_wrapper(adj_list, route_specs.source_node, elevs, route_specs, number_of_ranges=50, paths_per_range=30, coords=coords)
+    route_data = graph_algorithms.random_walk_wrapper(adj_list, route_specs.source_node, elevs, route_specs, number_of_ranges=4, paths_per_range=3, coords=coords)
     response['route_data'] = route_data
     return response

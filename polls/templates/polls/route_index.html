@@ -12,7 +12,7 @@
   <script>
 
 
-    var route_data = [  { 'max': 1600.0,
+    var data = [  { 'max': 1600.0,
                           'min': 1200.0,
                           'paths': [ [{'lat': 40.81, 'long': -73.95}, {'lat': 40.80, 'long': -73.95}],
                                      [{'lat': 10.81, 'long': -13.95}, {'lat': 10.80, 'long': -13.95}]
@@ -30,32 +30,17 @@
 
 
 
-    //data structures:
-    //   ranges: [ {'max': 1600.0, 'min': 1200.0}, {'max': 2000.0, 'min': 1600.0} ]
-    //   routes: { '1200.0': [ [{'lat': 40.81, 'long': -73.95}, {'lat': 40.80, 'long': -73.95}] , [{'lat': 40.81, 'long': -73.95}, {'lat': 40.80, 'long': -73.95}] ],
-    //             '1600.0': [ [{'lat': 40.81, 'long': -73.95}, {'lat': 40.80, 'long': -73.94}],  [{'lat': 40.81, 'long': -73.95}, {'lat': 40.80, 'long': -73.95}] ]
-    //           }
-    //distances: {'1600.0*0': 1998.1162401389067, '1200.0*0': 1576.8605361311124}
+    var displayRandomRouteJSON = function(route_data){
+        var random_range_index = getRandomInt(0, route_data.length-1);
+        var chosen_range = route_data[random_range_index];
+        var random_path_index = getRandomInt(0, chosen_range.paths.length-1);
+        var selected_path = chosen_range.paths[random_path_index];
+        var selected_path_distance = chosen_range.distances[random_path_index];
+        document.getElementById('current_route').innerHTML = random_range_index+","+random_path_index+","+selected_path_distance + JSON.stringify(selected_path, null, 4);
+    }
 
-
-    var ranges = [ {'max': 1600.0, 'min': 1200.0}, {'max': 2000.0, 'min': 1600.0} ]
-
-    var routes = { '1200.0': [ [{'lat': 40.81, 'long': -73.95}, {'lat': 40.80, 'long': -73.95}] , [{'lat': 40.81, 'long': -73.95}, {'lat': 40.80, 'long': -73.95}] ],
-                   '1600.0': [ [{'lat': 40.81, 'long': -73.95}, {'lat': 40.80, 'long': -73.94}],  [{'lat': 40.81, 'long': -73.95}, {'lat': 40.80, 'long': -73.95}] ]
-                 }
-
-    var options = ['Option 1','Option 2','Option 3']
-
-    var makeUL = function(list){
-        var a = '<ul>'
-            b = '</ul>'
-            m = [];
-
-        for (i = 0; i < list.length; i += 1){
-            m[i] = '<li>' + list[i] + '</li>';
-        }
-
-        document.getElementById("route_solution").innerHTML = a + m + b;
+    function getRandomInt (min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
      var computePathsFresh = function(){
@@ -72,7 +57,8 @@
         },
         function(data,status){
             if(data.warning === "okay"){
-              alert(data.warning);
+              displayRandomRouteJSON(data.route_data);
+              document.getElementById("route_image").src="http://maps.googleapis.com/maps/api/staticmap?size=400x400&sensor=false&path=40.8108534898,-73.9506912231|40.8102038588,-73.9511632919|40.8095379805,-73.9516782761|40.8083523754,-73.9488136768|40.8090182656,-73.9483845234|40.8096841492,-73.9479231834|40.8108534898,-73.9506912231|40.8102038588,-73.9511632919|40.8095379805,-73.9516782761|40.808880216,-73.952139616|40.8082630483,-73.952600956";
               document.getElementById('whereToPrint').innerHTML = JSON.stringify(data.route_data, null, 4);
             } else {
               alert(data.warning);
@@ -142,6 +128,8 @@
 </head>
 <body>
 
+<pre id=current_route></pre>
+
 <select id="start_list" onchange="computePathsFresh()">
    <option value="-1" >Choose your starting coordinates</option>
    {% for n in nodes %}
@@ -172,7 +160,7 @@
 
 <div id="slider-range-elev-max"></div>
 
-<div id="route_solution"></div>
+<img id="route_image" src="http://maps.googleapis.com/maps/api/staticmap?center=40.81085348983534,-73.95069122314453&zoom=14&size=400x400&maptype=roadmap&sensor=false">
 
 <pre id=whereToPrint></pre>
 
