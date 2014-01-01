@@ -88,7 +88,6 @@
     }
 
      var computePathsFresh = function(){
-        alert("call to server");
         $.getJSON("http://127.0.0.1:8000/polls/route_solutions/",
         {
            source_node_id: document.getElementById("start_list").value,
@@ -211,8 +210,6 @@
 <img id="route_image" src="http://maps.googleapis.com/maps/api/staticmap?center=40.81085348983534,-73.95069122314453&zoom=14&size=400x400&maptype=roadmap&sensor=false&key=AIzaSyBLkeL8vhUY5qhueJvbpTf1x4v9l6tmNEY">
 
 <p><button type="button" onclick="displayRandomRouteJSON()">Get Alternate Route</button></p>
-
-<pre id=whereToPrint></pre>
 
 <pre id=current_route></pre>
 

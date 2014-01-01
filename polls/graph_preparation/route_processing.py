@@ -137,7 +137,7 @@ def main_route_calculator(route_specs):
     if check_inherent_specs(route_specs) is False:
         response["warning"] = "Fix elevation ranges: " +str(route_specs.elev_min_b) + " is greater than " + str(route_specs.elev_max_b)
         return response
-    #elev_message = "\nLowest/Highest elevation in graph: " + str(get_min(elevs)) +"/"+ "{0:.2f}".format(get_max(elevs))
+
     if check_node_exists_in_elev_ranges(route_specs.elev_min_a, route_specs.elev_min_b) is False:
         response["warning"] = "No node exists with elevation in range: " + str(route_specs.elev_min_a)+" - "+str(route_specs.elev_min_b) #+ elev_message
         return response
