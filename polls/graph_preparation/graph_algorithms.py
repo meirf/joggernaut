@@ -33,7 +33,7 @@ def random_walk_wrapper(un_cleared_graph, source_node, elevs, route_specs, numbe
                     r['paths'].append(path)
                     r['distances'].append(running_distance)
                 else:
-                    path_in_coords = [{'lat':coords[node][0], 'long':coords[node][1]} for node in path]
+                    path_in_coords = [{'lat':coords[node][0], 'long':coords[node][1] , 'node_id':node} for node in path]
                     r['paths'].append(path_in_coords)
                     r['distances'].append(running_distance)
     ranges = [r for r in ranges if len(r['paths'])>0 and len(r['distances'])>0]
@@ -93,8 +93,10 @@ def random_walk(cleared_graph, source_node, closest_distances, dist_min, dist_ma
         if len(candidate_nodes) > 0:
             new_node = random.choice(candidate_nodes)
             running_distance += cleared_graph[path[-1]][new_node]
-            seen_X = True if closest_distances[new_node][0]==0 else False
-            seen_Y = True if closest_distances[new_node][1]==0 else False
+            if closest_distances[new_node][0]==0:
+                seen_X = True
+            if closest_distances[new_node][1]==0:
+                seen_Y = True
             path.append(new_node)
         else:
             break
@@ -110,9 +112,9 @@ def random_walk(cleared_graph, source_node, closest_distances, dist_min, dist_ma
        will put us over the dist_max
     b. We will filter out any node which
        does not have a distance (is None) to
-       node in X or Y depending on whether we've
-       seen such nodes yet. Once we've
-       seen a node in X or Y, we don't care about this.
+       node in X or Y or its distance
+       to these nodes puts it over max dist limit.
+       Once we've seen a node in X or Y, we don't care about this.
     c. We will filter out any node that is equal to the node
        2 nodes prior if the path length so far is >1.
     """
@@ -121,9 +123,9 @@ def is_viable(node, running_distance, dist_max, path, cleared_graph, seen_X, see
     next_dist = cleared_graph[prev_node][node]
     if running_distance + next_dist > dist_max:#criteria a
         return False
-    if (not seen_X) and closest_distances[node][0] is None:#criteria b
+    if (not seen_X) and (closest_distances[node][0] is None or closest_distances[node][0]+running_distance+next_dist>dist_max):#criteria b
         return False
-    if (not seen_Y) and closest_distances[node][1] is None:#criteria b
+    if (not seen_Y) and (closest_distances[node][1] is None or closest_distances[node][1]+running_distance+next_dist>dist_max):#criteria b
         return False
     if len(path)>1 and path[-2]==node:#criteria c
         return False

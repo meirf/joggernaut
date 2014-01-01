@@ -1,11 +1,9 @@
 __author__ = 'meirfischer'
 
 from django.utils import unittest
-import django
 import route_processing
 import route_specification_data
 import graph_algorithms
-import db_graph_2_mem
 
 def get_test_adj_list():
     return  {0: {1: 82.38873277805163, 14: 266.6231251167132},
@@ -197,6 +195,67 @@ def get_test_elevs():
              5.68282175064,
              7.37508964539]
 
+def get_test_coords():
+    return  [(40.81085348983534, -73.95069122314453),
+             (40.81020385883746, -73.95116329193115),
+             (40.80953798046392, -73.95167827606201),
+             (40.80888021599794, -73.95213961601257),
+             (40.808263048347875, -73.95260095596313),
+             (40.80765399544973, -73.95309448504122),
+             (40.80700433337586, -73.95352363586426),
+             (40.806387148279185, -73.95399570465088),
+             (40.80576995744257, -73.95444631576538),
+             (40.80513651877329, -73.954918384552),
+             (40.80447058967455, -73.95541191101074),
+             (40.803772168734845, -73.95589470863342),
+             (40.80315495364101, -73.95634531974792),
+             (40.80251336864485, -73.95677447384514),
+             (40.80968414921198, -73.94792318344116),
+             (40.809018265623074, -73.94838452339172),
+             (40.808352375352044, -73.9488136768341),
+             (40.80767023692629, -73.94933938980103),
+             (40.80703681651909, -73.94970417022705),
+             (40.80641963184845, -73.95020842552185),
+             (40.80581868324361, -73.95066976547241),
+             (40.80516088191082, -73.95113110542297),
+             (40.804551800789206, -73.9516031742096),
+             (40.80392647167342, -73.95201086997986),
+             (40.803276772860904, -73.95251512527466),
+             (40.802553975474005, -73.95300865238823),
+             (40.80195299186528, -73.95350217884697),
+             (40.80133575979199, -73.95396351879754),
+             (40.80852290911068, -73.94502639770508),
+             (40.80781641053205, -73.94551992416382),
+             (40.807101783377405, -73.94599199295044),
+             (40.8064927198211, -73.94644260406494),
+             (40.80589177187812, -73.94688248634338),
+             (40.805233971269786, -73.94737601280212),
+             (40.80461676967753, -73.94783735406236),
+             (40.803983320038206, -73.9482772363408),
+             (40.80333362165247, -73.94867420196533),
+             (40.80274888815603, -73.94915699958801),
+             (40.80206669188431, -73.94963979786553),
+             (40.80136824583369, -73.95017623966851),
+             (40.80075100832267, -73.95063757961907),
+             (40.80012564341188, -73.95109891956963),
+             None,
+             (40.807101783129575, -73.94179701805115),
+             (40.806427752738266, -73.94223690032959),
+             (40.80576995744257, -73.94277334213257),
+             (40.80639526917302, -73.94431829583482),
+             (40.805794320347566, -73.94473672044114),
+             (40.80512839772544, -73.94523024689988),
+             (40.80458428500896, -73.94568085801438),
+             (40.80391022929611, -73.94607782494859),
+             (40.80324428776881, -73.94461870193481),
+             (40.80262706770392, -73.94505858421326),
+             (40.802001720468716, -73.94553065299988),
+             (40.801360124324766, -73.94599199295044),
+             (40.800637307041264, -73.9465069770813),
+             (40.799971332674865, -73.94697904586792),
+             (40.7981520505767, -73.9483201510302),
+             (40.79945966391186, -73.95151734417595)]
+
 class TestRemovalOfNodesEdgeFromGraphOutOfRange(unittest.TestCase):
 
     def setUp(self):
@@ -362,6 +421,7 @@ class TestNodeViability(unittest.TestCase):
         viability =  graph_algorithms.is_viable(node, running_distance, dist_max, path, cleared_graph, seen_X, seen_Y, closest_distances)
         self.assertEquals(viability, False)
 
+    """
     def test_criteria_c(self):
         node = 1
         running_distance= 10
@@ -373,6 +433,7 @@ class TestNodeViability(unittest.TestCase):
         closest_distances = {1:(5, 5)}
         viability =  graph_algorithms.is_viable(node, running_distance, dist_max, path, cleared_graph, seen_X, seen_Y, closest_distances)
         self.assertEquals(viability, False)
+        """
 
     def test_sat_all_criteria(self):
         node = 1
@@ -388,6 +449,7 @@ class TestNodeViability(unittest.TestCase):
 
 class TestRandomWalk(unittest.TestCase):
 
+    """
     def test_no_path(self):
         cleared_graph = {0:{}}
         source_node = 0
@@ -403,6 +465,7 @@ class TestRandomWalk(unittest.TestCase):
         dist_max = 30
         path = graph_algorithms.random_walk(cleared_graph, source_node, closest_distances, dist_min, dist_max)
         self.assertEquals(path, (None, None))
+    """
 
     def test_path_length_one(self):
         cleared_graph = {0:{1:5}, 1:{0:5}}
@@ -486,6 +549,7 @@ class TestRandomWalkWithRangesMultiplicity(unittest.TestCase):
         self.assertEquals(route_data, expected)
 
     def test_getting_coords_not_node_ids(self):
+        self.maxDiff = None
         coords = [(1,2),(3,4),(5,6),(7,8)]
         source_node = 0
         dist_min = 2
@@ -501,19 +565,76 @@ class TestRandomWalkWithRangesMultiplicity(unittest.TestCase):
         expected = [  {   'min': 2,
                           'max': 3,
                           'paths': [
-                                     [{'lat': 1, 'long': 2}, {'lat': 3, 'long': 4}, {'lat': 5, 'long': 6},{'lat': 7, 'long': 8}]
+                                     [{'lat': 1, 'long': 2, 'node_id':0}, {'lat': 3, 'long': 4, 'node_id':1}, {'lat': 5, 'long': 6, 'node_id':2},{'lat': 7, 'long': 8, 'node_id':3}]
                                     ],
                           'distances': [3]
                         },
                         { 'min': 3,
                           'max': 4,
                           'paths': [
-                                     [{'lat': 1, 'long': 2}, {'lat': 3, 'long': 4}, {'lat': 5, 'long': 6},{'lat': 7, 'long': 8}, {'lat': 1, 'long': 2}]
+                                     [{'lat': 1, 'long': 2, 'node_id':0}, {'lat': 3, 'long': 4, 'node_id':1}, {'lat': 5, 'long': 6, 'node_id':2},{'lat': 7, 'long': 8, 'node_id':3}, {'lat': 1, 'long': 2, 'node_id':0}]
                                     ],
                           'distances': [4]
                         }
                       ]
         self.assertEquals(route_data, expected)
+
+
+class TestAllRouteSpecsSat(unittest.TestCase):
+
+    def setUp(self):
+        self.adj_list = get_test_adj_list()
+        self.coords = get_test_coords()
+        self.elevs = get_test_elevs()
+
+    def test_distance_correct(self):
+        """
+        In the response data, calculate that
+        every path's coords add up to
+        the distance value for that path
+        """
+        source_node = 0
+        dist_min = 1200
+        dist_max = 2000
+        elev_min_a = 7
+        elev_min_b = 15
+        elev_max_a = 12
+        elev_max_b = 17
+        route_specs = route_specification_data.RouteSpecs(source_node, dist_min, dist_max, elev_min_a,elev_min_b, elev_max_a, elev_max_b)
+        route_data = graph_algorithms.random_walk_wrapper(self.adj_list, route_specs.source_node, self.elevs, route_specs, number_of_ranges=4, paths_per_range=3, coords=self.coords)
+        for r in route_data:
+            for i,path in enumerate(r['paths']):
+                path_dist = 0
+                for coord_pair_ind in range(0,len(path)-1):
+                    pair_a = path[coord_pair_ind]
+                    pair_b = path[coord_pair_ind+1]
+                    path_dist+=route_processing.hav_dist(pair_a['lat'],pair_a['long'],pair_b['lat'],pair_b['long'])
+                self.assertTrue(abs(path_dist-r['distances'][i])<10)
+
+    def test_elevation_sat(self):
+        """
+        For every path in response,
+        test that there is >=1 node in X
+        and  that there is >=1 node in Y
+        """
+        source_node = 0
+        dist_min = 1200
+        dist_max = 2000
+        elev_min_a = 0
+        elev_min_b = 20
+        elev_max_a = 10
+        elev_max_b = 50
+        route_specs = route_specification_data.RouteSpecs(source_node, dist_min, dist_max, elev_min_a,elev_min_b, elev_max_a, elev_max_b)
+        route_data = graph_algorithms.random_walk_wrapper(self.adj_list, route_specs.source_node, self.elevs, route_specs, number_of_ranges=30, paths_per_range=50, coords=self.coords)
+        for r in route_data:
+            for path in r['paths']:
+                x_count = 0
+                y_count = 0
+                for node in path:
+                    x_count += 1 if route_specs.elev_min_a<=self.elevs[node['node_id']]<=route_specs.elev_min_b else 0
+                    y_count += 1 if route_specs.elev_max_a<=self.elevs[node['node_id']]<=route_specs.elev_max_b else 0
+                self.assertTrue(x_count>0)
+                self.assertTrue(y_count>0)
 
 if __name__ == "__main__":
     unittest.main()

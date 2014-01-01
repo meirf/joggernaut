@@ -103,6 +103,7 @@
         function(data,status){
             if(data.warning === "okay"){
               route_data = data.route_data;
+              //document.getElementById('response_test').innerHTML = JSON.stringify(route_data, null, 4);
               if(route_data.length === 0){
                 alert("No results for this request. Please relax the constraints.");
               } else {
@@ -186,21 +187,21 @@
 <br></br>
 
 <p>
-  <label for="amount-range-dist">Distance range(meters):</label>
+  <label for="amount-range-dist">Distance range (meters):</label>
   <input type="text" id="amount-range-dist" style="border:0; color:#f6931f; font-weight:bold;">
 </p>
 
 <div id="slider-range-dist"></div>
 
 <p>
-  <label for="amount-range-elev-min">Elevation min range(meters):</label>
+  <label for="amount-range-elev-min">Elevation min range (meters):</label>
   <input type="text" id="amount-range-elev-min" style="border:0; color:#f6931f; font-weight:bold;">
 </p>
 
 <div id="slider-range-elev-min"></div>
 
 <p>
-  <label for="amount-range-elev-max">Elevation max range(meters):</label>
+  <label for="amount-range-elev-max">Elevation max range (meters):</label>
   <input type="text" id="amount-range-elev-max" style="border:0; color:#f6931f; font-weight:bold;">
 </p>
 
@@ -211,6 +212,8 @@
 <img id="route_image" src="http://maps.googleapis.com/maps/api/staticmap?center=40.81085348983534,-73.95069122314453&zoom=14&size=400x400&maptype=roadmap&sensor=false&key=AIzaSyBLkeL8vhUY5qhueJvbpTf1x4v9l6tmNEY">
 
 <p><button type="button" onclick="displayRandomRouteJSON()">Get Alternate Route</button></p>
+
+<pre id=response_test></pre>
 
 <pre id=current_route></pre>
 

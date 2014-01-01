@@ -4,6 +4,7 @@ from polls.models import Node, Edge
 import db_graph_2_mem
 import graph_algorithms
 import sys
+import math
 import json
 from collections import defaultdict
 
@@ -128,6 +129,16 @@ def get_max(l):
         return max(l)
     return -1
 
+def hav_dist(lat1, lon1, lat2, lon2):
+    radius = 6371 # km
+    dlat = math.radians(lat2-lat1)
+    dlon = math.radians(lon2-lon1)
+    a = math.sin(dlat/2) * math.sin(dlat/2) + math.cos(math.radians(lat1)) \
+        * math.cos(math.radians(lat2)) * math.sin(dlon/2) * math.sin(dlon/2)
+    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1-a))
+    d = radius * c
+    return d * 1000
+
 def main_route_calculator(route_specs):
     response = {"warning" : "okay"}
     elevs = db_graph_2_mem.get_elevs()
@@ -157,6 +168,6 @@ def main_route_calculator(route_specs):
         response["warning"] = "Elevation ranges can't be reached. Min elevation/Max elevation within distance " + str(route_specs.dist_max) +" is " + "{0:.2f}".format(min(elevs_within_D1)) +"/"+ "{0:.2f}".format(max(elevs_within_D1))
         return response
     ####################
-    route_data = graph_algorithms.random_walk_wrapper(adj_list, route_specs.source_node, elevs, route_specs, number_of_ranges=4, paths_per_range=3, coords=coords)
+    route_data = graph_algorithms.random_walk_wrapper(adj_list, route_specs.source_node, elevs, route_specs, number_of_ranges=5, paths_per_range=20, coords=coords)
     response['route_data'] = route_data
     return response
