@@ -8,7 +8,7 @@
   <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-  <link rel="stylesheet" href="/resources/demos/style.css">
+
   <script>
 
     var displayImagePath = function(selected_path){
@@ -88,7 +88,8 @@
     }
 
      var computePathsFresh = function(){
-        $.getJSON("http://127.0.0.1:8000/polls/route_solutions/",
+        //$.getJSON("http://127.0.0.1:8000/polls/route_solutions/",
+        $.getJSON("http://joggernaut.pagekite.me/polls/route_solutions/",
         {
            source_node_id: document.getElementById("start_list").value,
            dist_min: document.getElementById("amount-range-dist").value.split("-")[0],
