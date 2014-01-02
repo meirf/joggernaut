@@ -26,7 +26,10 @@ def get_coordinates():
 
 def get_all_elevations():
     """
-    All below data was retrieved via Google API and then hardcoded.
+    All below data was retrieved via Google API and then hardcoded
+    to improve speed. Because this module is only meant to load
+    data into a db, this is executed seldomly. Further calls
+    are made to the db.
     """
     coords = get_coordinates()
     #elevs = []
