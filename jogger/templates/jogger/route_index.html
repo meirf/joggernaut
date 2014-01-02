@@ -15,7 +15,8 @@
        for (i = 1; i < selected_path.length; i += 1){
             pipedCoords += "|"+selected_path[i].lat+","+selected_path[i].long;;
        }
-       var letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+       var letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O',
+                      'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
        var markers = ""
        for (i = 0; i < selected_path.length; i += 1){
             if(i<26){
@@ -33,6 +34,7 @@
 
     var route_data = []
 
+    var limit_mess = "\n In case the path is long, the image may not load due to Google's API limits on number of path markers.\n\n";
 
     var displayRandomRouteJSON = function(){
         var random_range_index = getRandomInt(0, route_data.length-1);
@@ -42,7 +44,7 @@
         var selected_path_distance = chosen_range.distances[random_path_index];
         displayImagePath(selected_path);
         displayPathDistance(selected_path_distance);
-        document.getElementById('current_route').innerHTML = "\n In case the path is long, the image may not load due to Google's API limits on number of path markers.\n\n"+JSON.stringify(selected_path, null, 4);
+        document.getElementById('current_route').innerHTML = limit_mess+JSON.stringify(selected_path, null, 4);
     }
 
     function getRandomInt (min, max) {
