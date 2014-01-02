@@ -1,1 +1,2 @@
+numpy
 Django==1.6

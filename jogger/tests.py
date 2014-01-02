@@ -1,9 +1,8 @@
-__author__ = 'meirfischer'
-
 from django.utils import unittest
 from graph_preparation import route_processing
 from graph_preparation import route_specification_data
 from graph_preparation import graph_algorithms
+
 
 def get_test_adj_list():
     return  {0: {1: 82.38873277805163, 14: 266.6231251167132},
@@ -134,6 +133,7 @@ def get_test_adj_list():
              57: {56: 231.5157205933401, 58: 305.699490911616},
              58: {41: 81.95105637086372, 57: 305.699490911616}}
 
+
 def get_test_elevs():
     return  [8.772932052612305,
              8.630032539367676,
@@ -194,6 +194,7 @@ def get_test_elevs():
              7.09258747101,
              5.68282175064,
              7.37508964539]
+
 
 def get_test_coords():
     return  [(40.81085348983534, -73.95069122314453),
@@ -256,6 +257,7 @@ def get_test_coords():
              (40.7981520505767, -73.9483201510302),
              (40.79945966391186, -73.95151734417595)]
 
+
 class TestRemovalOfNodesEdgeFromGraphOutOfRange(unittest.TestCase):
 
     def setUp(self):
@@ -264,13 +266,13 @@ class TestRemovalOfNodesEdgeFromGraphOutOfRange(unittest.TestCase):
         self.filtered_elevs = [elev for elev in self.elevs if elev is not None]
 
     def test_all_nodes_out_of_range(self):
-        cleared_graph = route_processing.clear_graph_of_nodes_out_of_elev_range(self.adj_list, self.elevs, max(self.elevs)+1, max(self.elevs)+2)
+        cleared_graph = route_processing.clear_out_range(self.adj_list, self.elevs, max(self.elevs)+1, max(self.elevs)+2)
         self.assertEquals(len(cleared_graph), 0)
-        cleared_graph = route_processing.clear_graph_of_nodes_out_of_elev_range(self.adj_list, self.elevs, min(self.filtered_elevs)-2, min(self.filtered_elevs)-1)
+        cleared_graph = route_processing.clear_out_range(self.adj_list, self.elevs, min(self.filtered_elevs)-2, min(self.filtered_elevs)-1)
         self.assertEquals(len(cleared_graph), 0)
 
     def test_all_nodes_in_range(self):
-        cleared_graph = route_processing.clear_graph_of_nodes_out_of_elev_range(self.adj_list, self.elevs, min(self.filtered_elevs)-1, max(self.elevs)+1)
+        cleared_graph = route_processing.clear_out_range(self.adj_list, self.elevs, min(self.filtered_elevs)-1, max(self.elevs)+1)
         self.assertEquals(cleared_graph, self.adj_list)
 
     def test_removal_of_nodes(self):
@@ -278,7 +280,7 @@ class TestRemovalOfNodesEdgeFromGraphOutOfRange(unittest.TestCase):
         els = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
         min = 5
         max = 10
-        cleared_graph = route_processing.clear_graph_of_nodes_out_of_elev_range(a_l, els, min, max)
+        cleared_graph = route_processing.clear_out_range(a_l, els, min, max)
         self.assertEquals(cleared_graph, {8:{9:4}, 7:{8:4}})
 
     def test_removal_of_edges(self):
@@ -286,7 +288,7 @@ class TestRemovalOfNodesEdgeFromGraphOutOfRange(unittest.TestCase):
         els = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
         min = 5
         max = 10
-        cleared_graph = route_processing.clear_graph_of_nodes_out_of_elev_range(a_l, els, min, max)
+        cleared_graph = route_processing.clear_out_range(a_l, els, min, max)
         self.assertEquals(cleared_graph, {8:{9:4}, 9:{7:6}})
 
     def test_removal_nodes_and_edges(self):
@@ -294,7 +296,7 @@ class TestRemovalOfNodesEdgeFromGraphOutOfRange(unittest.TestCase):
         els = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
         min = 5
         max = 10
-        cleared_graph = route_processing.clear_graph_of_nodes_out_of_elev_range(a_l, els, min, max)
+        cleared_graph = route_processing.clear_out_range(a_l, els, min, max)
         self.assertEquals(cleared_graph, {8:{9:4}, 9:{7:6}})
 
 
@@ -323,6 +325,7 @@ class TestGetNodesInRange(unittest.TestCase):
         max = 10
         nodes = route_processing.get_node_ids_in_range(a_l, els, min, max)
         self.assertEquals(nodes, range(5,11))
+
 
 class TestShortestDistancetoNodesinXY(unittest.TestCase):
 
@@ -395,6 +398,7 @@ class TestGatherAllClosestDistanceValues(unittest.TestCase):
         distances = route_processing.compute_closest_distance_values_at_each_node(cleared_graph, elevs, route_specs)
         self.assertEquals(distances, {0:(None,None),1:(None,None),2:(None,None)})
 
+
 class TestNodeViability(unittest.TestCase):
 
     def test_criteria_a(self):
@@ -421,20 +425,6 @@ class TestNodeViability(unittest.TestCase):
         viability =  graph_algorithms.is_viable(node, running_distance, dist_max, path, cleared_graph, seen_X, seen_Y, closest_distances)
         self.assertEquals(viability, False)
 
-    """
-    def test_criteria_c(self):
-        node = 1
-        running_distance= 10
-        dist_max = 20
-        path = [1,0]
-        cleared_graph = {0:{1:5}}
-        seen_X = False
-        seen_Y = False
-        closest_distances = {1:(5, 5)}
-        viability =  graph_algorithms.is_viable(node, running_distance, dist_max, path, cleared_graph, seen_X, seen_Y, closest_distances)
-        self.assertEquals(viability, False)
-        """
-
     def test_sat_all_criteria(self):
         node = 1
         running_distance= 10
@@ -447,25 +437,8 @@ class TestNodeViability(unittest.TestCase):
         viability =  graph_algorithms.is_viable(node, running_distance, dist_max, path, cleared_graph, seen_X, seen_Y, closest_distances)
         self.assertEquals(viability, True)
 
-class TestRandomWalk(unittest.TestCase):
 
-    """
-    def test_no_path(self):
-        cleared_graph = {0:{}}
-        source_node = 0
-        closest_distances = {0: (None, None)}
-        dist_min = 10
-        dist_max = 30
-        path = graph_algorithms.random_walk(cleared_graph, source_node, closest_distances, dist_min, dist_max)
-        self.assertEquals(path, (None, None))
-        cleared_graph = {0:{1:5}, 1:{0:5}}
-        source_node = 0
-        closest_distances = {0: (5, 5), 1: (0,0)}
-        dist_min = 10
-        dist_max = 30
-        path = graph_algorithms.random_walk(cleared_graph, source_node, closest_distances, dist_min, dist_max)
-        self.assertEquals(path, (None, None))
-    """
+class TestRandomWalk(unittest.TestCase):
 
     def test_path_length_one(self):
         cleared_graph = {0:{1:5}, 1:{0:5}}
@@ -485,6 +458,7 @@ class TestRandomWalk(unittest.TestCase):
         (path, dist) = graph_algorithms.random_walk(cleared_graph, source_node, closest_distances, dist_min, dist_max)
         self.assertEquals(len(path), 3)
 
+
 class TestRanges(unittest.TestCase):
 
     def test_ranges(self):
@@ -496,6 +470,7 @@ class TestRanges(unittest.TestCase):
         max_dist = 10
         ranges = graph_algorithms.get_ranges(min_dist, max_dist, 5)
         self.assertEquals(ranges, [{"min":2, "max":4, 'paths':[], 'distances':[]},{"min":4, "max":6, 'paths':[], 'distances':[]},{"min":6, "max":8, 'paths':[], 'distances':[]},{"min":8, "max":10, 'paths':[], 'distances':[]}])
+
 
 class TestRandomWalkWithRangesMultiplicity(unittest.TestCase):
 
@@ -601,7 +576,7 @@ class TestAllRouteSpecsSatAFTER(unittest.TestCase):
         elev_max_a = 12
         elev_max_b = 17
         route_specs = route_specification_data.RouteSpecs(source_node, dist_min, dist_max, elev_min_a,elev_min_b, elev_max_a, elev_max_b)
-        route_data = graph_algorithms.random_walk_wrapper(self.adj_list, route_specs.source_node, self.elevs, route_specs, number_of_ranges=20, paths_per_range=50, coords=self.coords)
+        route_data = graph_algorithms.random_walk_wrapper(self.adj_list, route_specs.source_node, self.elevs, route_specs, num_of_ranges=20, paths_per_range=50, coords=self.coords)
         for r in route_data:
             for i,path in enumerate(r['paths']):
                 path_dist = 0
@@ -625,7 +600,7 @@ class TestAllRouteSpecsSatAFTER(unittest.TestCase):
         elev_max_a = 10
         elev_max_b = 50
         route_specs = route_specification_data.RouteSpecs(source_node, dist_min, dist_max, elev_min_a,elev_min_b, elev_max_a, elev_max_b)
-        route_data = graph_algorithms.random_walk_wrapper(self.adj_list, route_specs.source_node, self.elevs, route_specs, number_of_ranges=20, paths_per_range=50, coords=self.coords)
+        route_data = graph_algorithms.random_walk_wrapper(self.adj_list, route_specs.source_node, self.elevs, route_specs, num_of_ranges=20, paths_per_range=50, coords=self.coords)
         for r in route_data:
             for path in r['paths']:
                 x_count = 0
@@ -708,20 +683,3 @@ class TestMinPriorMax(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

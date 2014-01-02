@@ -10,6 +10,7 @@ class Node(models.Model):
     def __unicode__(self):
         return str(self.node_id)
 
+
 class Edge(models.Model):
     node_a = models.ForeignKey(Node, related_name='from_node')
     node_b = models.ForeignKey(Node, related_name='to_node')

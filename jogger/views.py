@@ -4,20 +4,20 @@ from jogger.models import Node
 from jogger.graph_preparation import route_processing, route_specification_data
 import json
 
-def ajax_test(request):
-    if request.method == 'GET' and request.is_ajax():
-        name = request.GET['name']
-        city = request.GET['city']
-        message = name + ' lives in ' + city
-        return HttpResponse(json.dumps({'message': message}))
-    return HttpResponse("You're looking at ajax_test")
 
 def route_index(request):
+    """
+    Main app page
+    """
     node_objs = Node.objects.all()
     context = { 'nodes': node_objs }
     return render(request, 'jogger/route_index.html', context)
 
+
 def route_solutions(request):
+    """
+    Used as ajax endpoint for computing routes.
+    """
     if request.method == 'GET' and request.is_ajax():
         a = request.GET['source_node_id']
         b = request.GET['dist_min']
