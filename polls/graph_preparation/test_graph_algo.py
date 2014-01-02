@@ -580,7 +580,7 @@ class TestRandomWalkWithRangesMultiplicity(unittest.TestCase):
         self.assertEquals(route_data, expected)
 
 
-class TestAllRouteSpecsSat(unittest.TestCase):
+class TestAllRouteSpecsSatAFTER(unittest.TestCase):
 
     def setUp(self):
         self.adj_list = get_test_adj_list()
@@ -620,12 +620,12 @@ class TestAllRouteSpecsSat(unittest.TestCase):
         source_node = 0
         dist_min = 1200
         dist_max = 2000
-        elev_min_a = 0
-        elev_min_b = 20
+        elev_min_a = 7
+        elev_min_b = 25
         elev_max_a = 10
         elev_max_b = 50
         route_specs = route_specification_data.RouteSpecs(source_node, dist_min, dist_max, elev_min_a,elev_min_b, elev_max_a, elev_max_b)
-        route_data = graph_algorithms.random_walk_wrapper(self.adj_list, route_specs.source_node, self.elevs, route_specs, number_of_ranges=30, paths_per_range=50, coords=self.coords)
+        route_data = graph_algorithms.random_walk_wrapper(self.adj_list, route_specs.source_node, self.elevs, route_specs, number_of_ranges=20, paths_per_range=50, coords=self.coords)
         for r in route_data:
             for path in r['paths']:
                 x_count = 0
@@ -636,5 +636,92 @@ class TestAllRouteSpecsSat(unittest.TestCase):
                 self.assertTrue(x_count>0)
                 self.assertTrue(y_count>0)
 
+
+class TestSatCriteriaC(unittest.TestCase):
+
+    def test_one_node_in_path(self):
+        path = [0]
+        sat = graph_algorithms.satisfies_criteria_c(path)
+        self.assertEquals(sat, True)
+
+    def test_two_nodes_in_path(self):
+        path = [0, 1]
+        sat = graph_algorithms.satisfies_criteria_c(path)
+        self.assertEquals(sat, True)
+
+    def test_many_nodes_in_path(self):
+        path = [0, 1, 2, 0, 4]
+        sat = graph_algorithms.satisfies_criteria_c(path)
+        self.assertEquals(sat, True)
+        path = [0, 1, 2, 0, 2]
+        sat = graph_algorithms.satisfies_criteria_c(path)
+        self.assertEquals(sat, False)
+        path = [0, 1, 2, 0, 4]
+        sat = graph_algorithms.satisfies_criteria_c(path)
+        self.assertEquals(sat, True)
+        path = [0, 2, 0]
+        sat = graph_algorithms.satisfies_criteria_c(path)
+        self.assertEquals(sat, False)
+
+
+class TestMinPriorMax(unittest.TestCase):
+
+    def test_node_in_x_before_node_in_y(self):
+        path  = [2,7]
+        elevs = [6,7,8,9,10,11,12,13,14]
+               # 0 1 2 3  4  5  6  7  8
+        route_specs = route_specification_data.RouteSpecs(0, 100, 200, 7, 10, 12, 15)
+        sat = graph_algorithms.has_x_before_y(path, elevs, route_specs)
+        self.assertEquals(sat, True)
+
+    def test_no_node_in_x(self):
+        path  = [0,7]
+        elevs = [6,7,8,9,10,11,12,13,14]
+               # 0 1 2 3  4  5  6  7  8
+        route_specs = route_specification_data.RouteSpecs(0, 100, 200, 7, 10, 12, 15)
+        sat = graph_algorithms.has_x_before_y(path, elevs, route_specs)
+        self.assertEquals(sat, False)
+
+    def test_no_node_in_y(self):
+        path  = [1,4]
+        elevs = [6,7,8,9,10,11,12,13,14]
+               # 0 1 2 3  4  5  6  7  8
+        route_specs = route_specification_data.RouteSpecs(0, 100, 200, 7, 10, 12, 15)
+        sat = graph_algorithms.has_x_before_y(path, elevs, route_specs)
+        self.assertEquals(sat, False)
+
+    def test_y_before_x(self):
+        path  = [7,3]
+        elevs = [6,7,8,9,10,11,12,13,14]
+               # 0 1 2 3  4  5  6  7  8
+        route_specs = route_specification_data.RouteSpecs(0, 100, 200, 7, 10, 12, 15)
+        sat = graph_algorithms.has_x_before_y(path, elevs, route_specs)
+        self.assertEquals(sat, False)
+
+    def test_y_same_as_x(self):
+        path  = [6]
+        elevs = [6,7,8,9,10,11,12,13,14]
+               # 0 1 2 3  4  5  6  7  8
+        route_specs = route_specification_data.RouteSpecs(0, 100, 200, 7, 12, 12, 15)
+        sat = graph_algorithms.has_x_before_y(path, elevs, route_specs)
+        self.assertEquals(sat, True)
+
 if __name__ == "__main__":
     unittest.main()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

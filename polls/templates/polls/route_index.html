@@ -43,7 +43,7 @@
         var selected_path_distance = chosen_range.distances[random_path_index];
         displayImagePath(selected_path);
         displayPathDistance(selected_path_distance);
-        document.getElementById('current_route').innerHTML = JSON.stringify(selected_path, null, 4);
+        document.getElementById('current_route').innerHTML = "\n In case of long paths the image may not load due to Google's API limits on number of path markers.\n\n"+JSON.stringify(selected_path, null, 4);
     }
 
     function getRandomInt (min, max) {

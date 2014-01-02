@@ -23,10 +23,12 @@ from collections import defaultdict
     """
 def random_walk_wrapper(un_cleared_graph, source_node, elevs, route_specs, number_of_ranges=2, paths_per_range=1, coords=None):
     cleared_graph = route_processing.clear_graph_of_nodes_out_of_elev_range(un_cleared_graph, elevs, route_specs.elev_min_a, route_specs.elev_max_b)
+    if source_node not in cleared_graph:
+        return []
     closest_distances = route_processing.compute_closest_distance_values_at_each_node(cleared_graph, elevs, route_specs)
     ranges = get_ranges(route_specs.dist_min, route_specs.dist_max, number_of_ranges)
     for r in ranges:
-        for count in range(paths_per_range):#iterate paths_per_range times
+        for count in range(paths_per_range):#iterate paths_per_range times NOTE: these are path ATTEMPTS
             (path,running_distance) = random_walk(cleared_graph, source_node, closest_distances, r['min'], r['max'])
             if path is not None and path not in r['paths']:
                 if coords is None:
@@ -38,6 +40,31 @@ def random_walk_wrapper(un_cleared_graph, source_node, elevs, route_specs, numbe
                     r['distances'].append(running_distance)
     ranges = [r for r in ranges if len(r['paths'])>0 and len(r['distances'])>0]
     return ranges
+
+def has_x_before_y(path, elevs, route_specs):
+    earliest_x_index_seen = -1
+    latest_y_index_seen = -1
+    for i,node in enumerate(path):
+        if route_specs.elev_min_a<=elevs[node]<=route_specs.elev_min_b:
+            earliest_x_index_seen = i
+            break
+    for i,node in enumerate(path):
+        if route_specs.elev_max_a<=elevs[node]<=route_specs.elev_max_b:
+            latest_y_index_seen = i
+    if earliest_x_index_seen!=-1 and latest_y_index_seen != -1 and latest_y_index_seen>=earliest_x_index_seen:
+        return True
+    return False
+
+def satisfies_criteria_c(path):
+    """
+    Nodes two steps away cannot be equal
+    """
+    if len(path)<3:
+        return True
+    for i in range(len(path)-2):
+        if path[i] == path[i+2]:
+            return False
+    return True
 
 def get_ranges(min_dist, max_dist, number_of_ranges=2):
     line_points = numpy.linspace(min_dist, max_dist, number_of_ranges)
