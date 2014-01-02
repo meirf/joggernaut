@@ -22,86 +22,7 @@
     <favorites_list name="mysite" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="route_index.html" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/polls/templates/polls/route_index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="220" column="7" selection-start="8054" selection-end="8054" vertical-scroll-proportion="0.93317974" vertical-offset="5570" max-vertical-offset="6554">
-              <folding>
-                <element signature="n#style#0;n#input#0;n#p#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#p#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#p#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/polls/templates/polls/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="609">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="views.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/polls/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="1211" max-vertical-offset="2146">
-              <folding>
-                <element signature="e#0#31#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="urls.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/polls/urls.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="0" selection-start="283" selection-end="283" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="493">
-              <folding>
-                <element signature="e#0#42#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="route_processing.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/polls/graph_preparation/route_processing.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="160" column="23" selection-start="6655" selection-end="6655" vertical-scroll-proportion="0.0" vertical-offset="3908" max-vertical-offset="5162">
-              <folding>
-                <element signature="e#28#63#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="graph_algorithms.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/polls/graph_preparation/graph_algorithms.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="122" column="49" selection-start="5521" selection-end="5521" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="9309">
-              <folding>
-                <element signature="e#0#33#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="test_graph_algo.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/polls/graph_preparation/test_graph_algo.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="582" column="0" selection-start="25427" selection-end="25427" vertical-scroll-proportion="119.75862" vertical-offset="16668" max-vertical-offset="17574">
-              <folding>
-                <element signature="e#28#61#0" expanded="true" />
-                <element signature="e#172#6588#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -111,22 +32,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/polls/templates/polls/detail.html" />
-        <option value="$PROJECT_DIR$/polls/user_route_restrictions.py" />
-        <option value="$PROJECT_DIR$/polls/graph_preparation/graph_input_2_db.py" />
-        <option value="$PROJECT_DIR$/polls/graph_preparation/graph_algo_tests.py" />
-        <option value="$PROJECT_DIR$/polls/graph_preparation/route_specification_data.py" />
-        <option value="$PROJECT_DIR$/polls/models.py" />
-        <option value="$PROJECT_DIR$/mysite/settings.py" />
-        <option value="$PROJECT_DIR$/polls/graph_preparation/db_graph_2_mem.py" />
-        <option value="$PROJECT_DIR$/polls/views.py" />
-        <option value="$PROJECT_DIR$/requirements.txt" />
-        <option value="$PROJECT_DIR$/mysite/wsgi.py" />
-        <option value="$PROJECT_DIR$/polls/graph_preparation/route_processing.py" />
-        <option value="$PROJECT_DIR$/polls/urls.py" />
         <option value="$PROJECT_DIR$/polls/templates/polls/route_index.html" />
         <option value="$PROJECT_DIR$/polls/graph_preparation/graph_algorithms.py" />
         <option value="$PROJECT_DIR$/polls/graph_preparation/test_graph_algo.py" />
+        <option value="$PROJECT_DIR$/polls/views.py" />
+        <option value="$PROJECT_DIR$/mysite/urls.py" />
+        <option value="$PROJECT_DIR$/jogger/urls.py" />
+        <option value="$PROJECT_DIR$/jogger/views.py" />
+        <option value="$PROJECT_DIR$/jogger/graph_preparation/db_graph_2_mem.py" />
+        <option value="$PROJECT_DIR$/jogger/graph_preparation/graph_input_2_db.py" />
+        <option value="$PROJECT_DIR$/jogger/graph_preparation/parse_kml_ids_with_coords.py" />
+        <option value="$PROJECT_DIR$/jogger/graph_preparation/route_processing.py" />
+        <option value="$PROJECT_DIR$/jogger/templates/polls/detail.html" />
+        <option value="$PROJECT_DIR$/jogger/templates/polls/index.html" />
+        <option value="$PROJECT_DIR$/jogger/templates/polls/results.html" />
+        <option value="$PROJECT_DIR$/jogger/templates/polls/route_index.html" />
+        <option value="$PROJECT_DIR$/mysite/settings.py" />
       </list>
     </option>
   </component>
@@ -287,43 +208,7 @@
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="polls">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
             <PATH_ELEMENT USER_OBJECT="mysite">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="polls">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="templates/polls">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="mysite">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="polls">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="graph_preparation">
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
@@ -608,14 +493,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32959184" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.7612245" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15047519" sideWeight="0.6704082" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15047519" sideWeight="0.2387755" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -650,131 +535,96 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/polls/graph_preparation/graph_input_2_db.py">
+    <entry file="file://$PROJECT_DIR$/jogger/graph_preparation/parse_kml_ids_with_coords.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="13" selection-start="452" selection-end="452" vertical-scroll-proportion="0.36708862" vertical-offset="0" max-vertical-offset="957">
+        <state line="8" column="30" selection-start="321" selection-end="321" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3393">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mysite/__init__.py">
+    <entry file="file://$PROJECT_DIR$/jogger/graph_preparation/route_processing.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="948">
+        <state line="2" column="11" selection-start="39" selection-end="39" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5162">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mysite/wsgi.py">
+    <entry file="file://$PROJECT_DIR$/jogger/graph_preparation/graph_input_2_db.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="36" selection-start="386" selection-end="386" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="551">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mysite/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="0" selection-start="519" selection-end="519" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2581">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mysite/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="348">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/polls/templates/polls/results.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="948">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/polls/templates/polls/detail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="948">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/polls/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="0" selection-start="506" selection-end="506" vertical-scroll-proportion="0.5200422" vertical-offset="0" max-vertical-offset="1247">
+        <state line="20" column="0" selection-start="674" selection-end="674" vertical-scroll-proportion="0.6118143" vertical-offset="0" max-vertical-offset="986">
           <folding>
-            <element signature="e#0#28#0" expanded="false" />
+            <element signature="e#28#115#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/polls/graph_preparation/db_graph_2_mem.py">
+    <entry file="file://$PROJECT_DIR$/jogger/graph_preparation/db_graph_2_mem.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="0" selection-start="750" selection-end="750" vertical-scroll-proportion="0.6118143" vertical-offset="0" max-vertical-offset="1102">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/polls/graph_preparation/test_graph_algo.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="582" column="0" selection-start="25427" selection-end="25427" vertical-scroll-proportion="119.75862" vertical-offset="16668" max-vertical-offset="17574">
-          <folding>
-            <element signature="e#28#61#0" expanded="true" />
-            <element signature="e#172#6588#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/polls/graph_preparation/graph_algorithms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="122" column="49" selection-start="5521" selection-end="5521" vertical-scroll-proportion="0.0" vertical-offset="660" max-vertical-offset="9309">
-          <folding>
-            <element signature="e#0#33#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/polls/graph_preparation/route_processing.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="160" column="23" selection-start="6655" selection-end="6655" vertical-scroll-proportion="0.0" vertical-offset="3618" max-vertical-offset="5162">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1131">
           <folding>
             <element signature="e#28#63#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/polls/urls.py">
+    <entry file="file://$PROJECT_DIR$/db.sqlite3">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="0" selection-start="283" selection-end="283" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="493">
+        <state line="112" column="33" selection-start="21707" selection-end="21707" vertical-scroll-proportion="0.27914438" vertical-offset="2987" max-vertical-offset="9976">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jogger/graph_preparation/test_graph_algo.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="21170">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jogger/graph_preparation/route_specification_data.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="493">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mysite/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="667" max-vertical-offset="2581">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mysite/wsgi.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="551">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mysite/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="406">
+          <folding>
+            <element signature="e#0#51#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jogger/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="948">
           <folding>
             <element signature="e#0#42#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/polls/views.py">
+    <entry file="file://$PROJECT_DIR$/jogger/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="1211" max-vertical-offset="2146">
+        <state line="16" column="0" selection-start="640" selection-end="640" vertical-scroll-proportion="0.28663102" vertical-offset="196" max-vertical-offset="1131">
           <folding>
             <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/polls/templates/polls/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="948">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/polls/templates/polls/route_index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="220" column="7" selection-start="8054" selection-end="8054" vertical-scroll-proportion="0.93317974" vertical-offset="5570" max-vertical-offset="6554">
-          <folding>
-            <element signature="n#style#0;n#input#0;n#p#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#p#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#p#2;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
