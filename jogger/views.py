@@ -1,8 +1,6 @@
-from django.http import Http404
-from django.shortcuts import get_object_or_404, render
-from django.http import HttpResponseRedirect, HttpResponse
-from django.core.urlresolvers import reverse
-from jogger.models import Choice, Poll, Node
+from django.shortcuts import render
+from django.http import HttpResponse
+from jogger.models import Node
 from jogger.graph_preparation import route_processing, route_specification_data
 import json
 
