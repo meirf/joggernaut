@@ -1,12 +1,13 @@
 __author__ = 'meirfischer'
 
-from jogger.models import Node, Edge
-import db_graph_2_mem
-import graph_algorithms
 import sys
 import math
-import json
 from collections import defaultdict
+
+from jogger.models import Node
+import db_graph_2_mem
+import graph_algorithms
+
 
 """If there is no node within distance D1 from A that has
    an elevation in range X or if there is no node within
