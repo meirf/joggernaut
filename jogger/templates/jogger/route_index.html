@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Run Guidance</title>
+
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
+  <script>
+
+    var displayImagePath = function(selected_path){
+       var pipedCoords = selected_path[0].lat+","+selected_path[0].long;
+       for (i = 1; i < selected_path.length; i += 1){
+            pipedCoords += "|"+selected_path[i].lat+","+selected_path[i].long;;
+       }
+       var letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+       var markers = ""
+       for (i = 0; i < selected_path.length; i += 1){
+            if(i<26){
+                markers += "&markers=label:"+letters[i]+"|"+selected_path[i].lat+","+selected_path[i].long;
+            }
+       }
+
+       api_key_add_on = "&key=" + "AIzaSyBLkeL8vhUY5qhueJvbpTf1x4v9l6tmNEY";
+       document.getElementById("route_image").src="http://maps.googleapis.com/maps/api/staticmap?size=400x400&sensor=false&path="+pipedCoords+markers+api_key_add_on;
+    }
+
+    var displayPathDistance = function(distance){
+        document.getElementById('path_distance').innerHTML = "Distance of path: "+distance+" meters";
+    }
+
+    var route_data = []
+
+
+    var displayRandomRouteJSON = function(){
+        var random_range_index = getRandomInt(0, route_data.length-1);
+        var chosen_range = route_data[random_range_index];
+        var random_path_index = getRandomInt(0, chosen_range.paths.length-1);
+        var selected_path = chosen_range.paths[random_path_index];
+        var selected_path_distance = chosen_range.distances[random_path_index];
+        displayImagePath(selected_path);
+        displayPathDistance(selected_path_distance);
+        document.getElementById('current_route').innerHTML = "\n In case of long paths the image may not load due to Google's API limits on number of path markers.\n\n"+JSON.stringify(selected_path, null, 4);
+    }
+
+    function getRandomInt (min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function updateRouteData(new_min, new_max) {
+        var j = route_data.length;
+        while (j--) {
+            var k = route_data[j].paths.length;
+            while(k--){
+                if(route_data[j].distances[k]>new_max || route_data[j].distances[k]<new_min){
+                    route_data[j].paths.splice(k, 1);
+                    route_data[j].distances.splice(k, 1);
+                }
+            }
+        }
+
+        var i = route_data.length;
+        while (i--) {
+            if (route_data[i].paths.length === 0) {
+                route_data.splice(i, 1);
+            }
+        }
+    }
+
+    var old_dist_min = 1200;
+    var old_dist_max = 2000;
+
+    function distanceUpdate(new_dist_min, new_dist_max){
+        if(new_dist_min >= old_dist_min && new_dist_max <= old_dist_max){
+            updateRouteData(new_dist_min, new_dist_max);
+            if(route_data.length === 0){
+                computePathsFresh();
+            }
+            displayRandomRouteJSON();
+        } else {
+            computePathsFresh();
+        }
+        old_dist_min = new_dist_min;
+        old_dist_max = new_dist_max;
+    }
+
+     var computePathsFresh = function(){
+        //$.getJSON("http://127.0.0.1:8000/jogger/route_solutions/",
+        $.getJSON("http://joggernaut.pagekite.me/jogger/route_solutions/",
+        {
+           source_node_id: document.getElementById("start_list").value,
+           dist_min: document.getElementById("amount-range-dist").value.split("-")[0],
+           dist_max: document.getElementById("amount-range-dist").value.split("-")[1],
+           elev_min_a: document.getElementById("amount-range-elev-min").value.split("-")[0],
+           elev_min_b: document.getElementById("amount-range-elev-min").value.split("-")[1],
+           elev_max_a: document.getElementById("amount-range-elev-max").value.split("-")[0],
+           elev_max_b: document.getElementById("amount-range-elev-max").value.split("-")[1],
+           csrfmiddlewaretoken:'{{ csrf_token }}'
+        },
+        function(data,status){
+            if(data.warning === "okay"){
+              route_data = data.route_data;
+              //document.getElementById('response_test').innerHTML = JSON.stringify(route_data, null, 4);
+              if(route_data.length === 0){
+                alert("No results for this request. Please relax the constraints.");
+              } else {
+                displayRandomRouteJSON();
+              }
+            } else {
+              alert(data.warning);
+            }
+       })
+        .fail(function(xhr) {
+            console.log("Error: " + xhr.statusText);
+            alert("Error: " + xhr.statusText);
+        });
+  }
+
+  var updateSliderVals = function(slider_name, left_val, right_val){
+        $( slider_name ).val( left_val + "-" + right_val);
+  }
+
+  $(function() {
+    $( "#slider-range-dist" ).slider({
+      step: 5,
+      range: true,
+      min: 300,
+      max: 3000,
+      values: [ 1200, 2000 ],
+      change: function( event, ui ) {
+        updateSliderVals("#amount-range-dist", ui.values[0], ui.values[1] );
+        distanceUpdate(ui.values[0], ui.values[1]);
+      }
+    });
+    updateSliderVals("#amount-range-dist" , $("#slider-range-dist").slider("values", 0),
+                                            $("#slider-range-dist").slider("values", 1)  );
+  });
+
+  $(function() {
+    $( "#slider-range-elev-min" ).slider({
+      step: 1,
+      range: true,
+      min: 0,
+      max: 100,
+      values: [ 0, 20 ],
+      change: function( event, ui ) {
+        updateSliderVals("#amount-range-elev-min" , ui.values[0], ui.values[1]);
+        computePathsFresh();
+      }
+    });
+    updateSliderVals("#amount-range-elev-min" , $("#slider-range-elev-min").slider("values", 0),
+                                                $("#slider-range-elev-min").slider("values", 1)  );
+  });
+
+  $(function() {
+    $( "#slider-range-elev-max" ).slider({
+      step: 1,
+      range: true,
+      min: 0,
+      max: 100,
+      values: [ 10, 50 ],
+      change: function( event, ui ) {
+        updateSliderVals("#amount-range-elev-max" , ui.values[0], ui.values[1]);
+        computePathsFresh();
+      }
+    });
+    updateSliderVals("#amount-range-elev-max" , $("#slider-range-elev-max").slider("values", 0),
+                                                $("#slider-range-elev-max").slider("values", 1)  );
+  });
+
+
+
+  </script>
+</head>
+<body>
+
+<select id="start_list" onchange="computePathsFresh()">
+   <option value="-1" >Choose your starting coordinates</option>
+   {% for n in nodes %}
+       <option value="{{ n.node_id }}">{{ n.latit }}, {{ n.longit }}</option>
+   {% endfor %}
+</select>
+
+<br></br>
+
+<p>
+  <label for="amount-range-dist">Distance range (meters):</label>
+  <input type="text" id="amount-range-dist" style="border:0; color:#f6931f; font-weight:bold;">
+</p>
+
+<div id="slider-range-dist"></div>
+
+<p>
+  <label for="amount-range-elev-min">Elevation min range (meters):</label>
+  <input type="text" id="amount-range-elev-min" style="border:0; color:#f6931f; font-weight:bold;">
+</p>
+
+<div id="slider-range-elev-min"></div>
+
+<p>
+  <label for="amount-range-elev-max">Elevation max range (meters):</label>
+  <input type="text" id="amount-range-elev-max" style="border:0; color:#f6931f; font-weight:bold;">
+</p>
+
+<div id="slider-range-elev-max"></div>
+
+<pre id=path_distance></pre>
+
+<img id="route_image" src="http://maps.googleapis.com/maps/api/staticmap?center=40.81085348983534,-73.95069122314453&zoom=14&size=400x400&maptype=roadmap&sensor=false&key=AIzaSyBLkeL8vhUY5qhueJvbpTf1x4v9l6tmNEY">
+
+<p><button type="button" onclick="displayRandomRouteJSON()">Get Alternate Route</button></p>
+
+<pre id=response_test></pre>
+
+<pre id=current_route></pre>
+
+</body>
+</html>
