@@ -49,7 +49,7 @@
       <file leaf-file-name="route_index.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/jogger/templates/jogger/route_index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="91" column="0" selection-start="3578" selection-end="3578" vertical-scroll-proportion="0.74136007" vertical-offset="1974" max-vertical-offset="6554">
+            <state line="44" column="212" selection-start="2325" selection-end="2325" vertical-scroll-proportion="0.3556299" vertical-offset="957" max-vertical-offset="6525">
               <folding>
                 <element signature="n#style#0;n#input#0;n#p#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
@@ -97,12 +97,12 @@
         <option value="$PROJECT_DIR$/jogger/graph_preparation/graph_input_2_db.py" />
         <option value="$PROJECT_DIR$/jogger/graph_preparation/parse_kml_ids_with_coords.py" />
         <option value="$PROJECT_DIR$/jogger/graph_preparation/route_specification_data.py" />
-        <option value="$PROJECT_DIR$/jogger/templates/jogger/route_index.html" />
         <option value="$PROJECT_DIR$/jogger/models.py" />
         <option value="$PROJECT_DIR$/jogger/urls.py" />
         <option value="$PROJECT_DIR$/jogger/views.py" />
         <option value="$PROJECT_DIR$/jogger/tests.py" />
         <option value="$PROJECT_DIR$/mysite/settings.py" />
+        <option value="$PROJECT_DIR$/jogger/templates/jogger/route_index.html" />
       </list>
     </option>
   </component>
@@ -266,56 +266,6 @@
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
             <PATH_ELEMENT USER_OBJECT="mysite">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="mysite">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="jogger">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="mysite">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="jogger">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="templates/jogger">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="mysite">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="jogger">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="graph_preparation">
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
@@ -773,7 +723,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/jogger/templates/jogger/route_index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="91" column="0" selection-start="3578" selection-end="3578" vertical-scroll-proportion="0.74136007" vertical-offset="1974" max-vertical-offset="6554">
+        <state line="44" column="212" selection-start="2325" selection-end="2325" vertical-scroll-proportion="0.3556299" vertical-offset="957" max-vertical-offset="6525">
           <folding>
             <element signature="n#style#0;n#input#0;n#p#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
