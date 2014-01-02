@@ -601,7 +601,7 @@ class TestAllRouteSpecsSatAFTER(unittest.TestCase):
         elev_max_a = 12
         elev_max_b = 17
         route_specs = route_specification_data.RouteSpecs(source_node, dist_min, dist_max, elev_min_a,elev_min_b, elev_max_a, elev_max_b)
-        route_data = graph_algorithms.random_walk_wrapper(self.adj_list, route_specs.source_node, self.elevs, route_specs, number_of_ranges=4, paths_per_range=3, coords=self.coords)
+        route_data = graph_algorithms.random_walk_wrapper(self.adj_list, route_specs.source_node, self.elevs, route_specs, number_of_ranges=20, paths_per_range=50, coords=self.coords)
         for r in route_data:
             for i,path in enumerate(r['paths']):
                 path_dist = 0

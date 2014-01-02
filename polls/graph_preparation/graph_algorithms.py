@@ -30,7 +30,7 @@ def random_walk_wrapper(un_cleared_graph, source_node, elevs, route_specs, numbe
     for r in ranges:
         for count in range(paths_per_range):#iterate paths_per_range times NOTE: these are path ATTEMPTS
             (path,running_distance) = random_walk(cleared_graph, source_node, closest_distances, r['min'], r['max'])
-            if path is not None and path not in r['paths']:
+            if path is not None and path not in r['paths'] and satisfies_criteria_c(path) and has_x_before_y(path, elevs, route_specs):
                 if coords is None:
                     r['paths'].append(path)
                     r['distances'].append(running_distance)
@@ -144,6 +144,8 @@ def random_walk(cleared_graph, source_node, closest_distances, dist_min, dist_ma
        Once we've seen a node in X or Y, we don't care about this.
     c. We will filter out any node that is equal to the node
        2 nodes prior if the path length so far is >1.
+       For this criteria, we have a method check after
+       path is created. If it fails this criteria it is thrown out.
     """
 def is_viable(node, running_distance, dist_max, path, cleared_graph, seen_X, seen_Y, closest_distances):
     prev_node = path[-1]
@@ -153,8 +155,6 @@ def is_viable(node, running_distance, dist_max, path, cleared_graph, seen_X, see
     if (not seen_X) and (closest_distances[node][0] is None or closest_distances[node][0]+running_distance+next_dist>dist_max):#criteria b
         return False
     if (not seen_Y) and (closest_distances[node][1] is None or closest_distances[node][1]+running_distance+next_dist>dist_max):#criteria b
-        return False
-    if len(path)>1 and path[-2]==node:#criteria c
         return False
     return True
 
