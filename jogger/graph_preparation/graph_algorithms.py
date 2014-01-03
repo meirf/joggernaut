@@ -122,6 +122,8 @@ def random_walk(cleared_graph, source_node, closest_distances, dist_min, dist_ma
            seen a node in X or Y, we don't care about this.
         c. We will filter out any node that is equal to the node
            2 nodes prior if the path length so far is >1.
+           **For this criteria, we have a method check after
+           path is created. If it fails this criteria it is thrown out.
     """
     running_distance = 0
     path = [source_node]
@@ -160,7 +162,7 @@ def is_viable(node, running_distance, dist_max, path, cleared_graph, seen_X, see
        Once we've seen a node in X or Y, we don't care about this.
     c. We will filter out any node that is equal to the node
        2 nodes prior if the path length so far is >1.
-       For this criteria, we have a method check after
+       **For this criteria, we have a method check after
        path is created. If it fails this criteria it is thrown out.
     """
     prev_node = path[-1]
