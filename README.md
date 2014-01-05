@@ -1,6 +1,6 @@
 Joggernaut
 ========
-This django app gives you a route in South Harlem based on your starting coordinate, distance specs and elevation specs. 
+Joggernaut aims to provide the incline and distance metrics of a treadmill using natural elevation changes of NYC streets. Provides a route in South Harlem based on starting coordinates, distance range and elevation specifications. 
 
 ###Core Algorithm
 **Input**
