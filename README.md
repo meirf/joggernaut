@@ -75,14 +75,14 @@ If these numbers are too high, the time for the server to fulfill a request woul
 
 ###Input Unsatisfiability
 
-There are a few cases when the server will warn the user of her input.
+Here are a few cases when the user will be warned of her input.
 
 * If X.a > Y.b
-* No node exists in [X.a, X.b] criteria e
-* No node exists in [Y.a, Y.b] criteria f
+* No node exists in G with elevation in [X.a, X.b]
+* No node exists in G with elevation in [Y.a, Y.b]
 * S has not been set
-* No node exists in [X.a, X.b] within [D0,D1]
-* No node exists in [Y.a, Y.b] within [D0,D1]
+* No node exists in G with elevation in [X.a, X.b] starting from S within D1 distance
+* No node exists in G with elevation in [Y.a, Y.b] starting from S within D1 distance
 
 ###Technologies Used
 
