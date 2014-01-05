@@ -1,6 +1,6 @@
 Joggernaut
 ========
-Joggernaut aims to provide the incline and distance metrics of a treadmill using natural elevation changes of NYC streets. Provides a route in South Harlem based on starting coordinates, distance range and elevation specifications. 
+Joggernaut aims to provide the incline and distance control of a treadmill using natural elevation changes of NYC streets. Provides a route in South Harlem based on starting coordinates, distance range and elevation specifications. 
 
 ###Core Algorithm
 **Input**
